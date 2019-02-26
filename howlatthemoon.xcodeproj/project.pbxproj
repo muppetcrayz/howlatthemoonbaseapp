@@ -13,6 +13,7 @@
 		08BB8533222324CE000E918A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BB8532222324CE000E918A /* Assets.xcassets */; };
 		08BB8536222324CE000E918A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BB8534222324CE000E918A /* LaunchScreen.storyboard */; };
 		08BB8541222324CE000E918A /* howlatthemoonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB8540222324CE000E918A /* howlatthemoonTests.swift */; };
+		08CC45DA2224CEF200484D37 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC45D82224CEF200484D37 /* BackgroundViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		08BB853C222324CE000E918A /* howlatthemoonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = howlatthemoonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BB8540222324CE000E918A /* howlatthemoonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = howlatthemoonTests.swift; sourceTree = "<group>"; };
 		08BB8542222324CE000E918A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08CC45D82224CEF200484D37 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				08BB8532222324CE000E918A /* Assets.xcassets */,
 				08BB8534222324CE000E918A /* LaunchScreen.storyboard */,
 				08BB8537222324CE000E918A /* Info.plist */,
+				08CC45D82224CEF200484D37 /* BackgroundViewController.swift */,
 			);
 			path = howlatthemoon;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08CC45DA2224CEF200484D37 /* BackgroundViewController.swift in Sources */,
 				08BB852E222324CC000E918A /* ViewController.swift in Sources */,
 				08BB852C222324CC000E918A /* AppDelegate.swift in Sources */,
 			);
