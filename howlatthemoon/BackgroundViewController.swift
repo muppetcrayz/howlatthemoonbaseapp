@@ -15,26 +15,30 @@ class BackgroundViewController: UIViewController {
 
         let imageView = UIImageView(image: UIImage(named: "partypic2"))
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        // Do any additional setup after loading the view.
+        
+        let image2 = UIImageView(image: UIImage(named: "logo"))
+        
+        image2.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(image2)
+        
+        NSLayoutConstraint.activate([
+            image2.heightAnchor.constraint(equalToConstant: 130),
+            image2.widthAnchor.constraint(equalToConstant: 264),
+            image2.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            image2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50)
+            ])
+        
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
