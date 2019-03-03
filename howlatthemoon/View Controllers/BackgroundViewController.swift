@@ -50,7 +50,7 @@ class BackgroundViewController: UIViewController {
 
             $0.snp.makeConstraints {
                 $0.top.equalTo(backgroundImageView).offset(2 * CGFloat.standardiOSSpacing)
-                $0.centerX.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.45)
+                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(150)
 
                 $0.width.equalTo(264)
                 $0.height.equalTo(130)

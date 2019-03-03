@@ -12,7 +12,7 @@ import UIKit
 class WelcomeViewController: HowlAtTheMoonViewController {
     let welcomeImageView = UIImageView(image: UIImage(named: "welcome"))
 
-    let beginButton = UIButton(type: .system)
+    let beginButton = HowlAtTheMoonButton(text: "Begin Your Playlist")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +32,6 @@ class WelcomeViewController: HowlAtTheMoonViewController {
         }
 
         with(beginButton) {
-            $0.titleLabel?.font = UIFont(name: "Oswald-Bold", size: 32)
-
-            $0.setTitle("Begin Your Playlist".uppercased(), for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0.6, alpha: 1.0) // aqua background for button
-            $0.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32) // set margins around text in button
-
             $0.usesAutoLayout = true
             view.addSubview($0)
 

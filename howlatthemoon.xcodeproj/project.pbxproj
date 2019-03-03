@@ -16,6 +16,7 @@
 		11CA9E73E3F041E6F828F18B /* Pods_howlatthemoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */; };
 		371107A1222C71B200BADABF /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371107A0222C71B200BADABF /* ShopViewController.swift */; };
 		371107A5222C79D600BADABF /* HowlAtTheMoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */; };
+		374B50F1222C949A00F301D9 /* HowlAtTheMoonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B50F0222C949A00F301D9 /* HowlAtTheMoonButton.swift */; };
 		3796886B222C4FEF006C2619 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3796886A222C4FEF006C2619 /* Extensions.swift */; };
 		3796886D222C5C4B006C2619 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3796886C222C5C4B006C2619 /* Constants.swift */; };
 		3796887E222C61F9006C2619 /* Oswald-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3796886F222C61F8006C2619 /* Oswald-ExtraLight.ttf */; };
@@ -60,6 +61,7 @@
 		1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_howlatthemoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		371107A0222C71B200BADABF /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowlAtTheMoonViewController.swift; sourceTree = "<group>"; };
+		374B50F0222C949A00F301D9 /* HowlAtTheMoonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowlAtTheMoonButton.swift; sourceTree = "<group>"; };
 		3796886A222C4FEF006C2619 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3796886C222C5C4B006C2619 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3796886F222C61F8006C2619 /* Oswald-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -125,10 +127,8 @@
 				3796886C222C5C4B006C2619 /* Constants.swift */,
 				3796886A222C4FEF006C2619 /* Extensions.swift */,
 				08BB852B222324CC000E918A /* AppDelegate.swift */,
-				08CC45D82224CEF200484D37 /* BackgroundViewController.swift */,
-				371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */,
-				08BB852D222324CC000E918A /* WelcomeViewController.swift */,
-				371107A0222C71B200BADABF /* ShopViewController.swift */,
+				374B50F3222C992F00F301D9 /* View Controllers */,
+				374B50F2222C992700F301D9 /* Views */,
 				3796886E222C61EC006C2619 /* Oswald Font */,
 				08BB8532222324CE000E918A /* Assets.xcassets */,
 				08BB8534222324CE000E918A /* LaunchScreen.storyboard */,
@@ -144,6 +144,25 @@
 				08BB8542222324CE000E918A /* Info.plist */,
 			);
 			path = howlatthemoonTests;
+			sourceTree = "<group>";
+		};
+		374B50F2222C992700F301D9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				374B50F0222C949A00F301D9 /* HowlAtTheMoonButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		374B50F3222C992F00F301D9 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				08CC45D82224CEF200484D37 /* BackgroundViewController.swift */,
+				371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */,
+				08BB852D222324CC000E918A /* WelcomeViewController.swift */,
+				371107A0222C71B200BADABF /* ShopViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		3796886E222C61EC006C2619 /* Oswald Font */ = {
@@ -344,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3796886D222C5C4B006C2619 /* Constants.swift in Sources */,
+				374B50F1222C949A00F301D9 /* HowlAtTheMoonButton.swift in Sources */,
 				371107A5222C79D600BADABF /* HowlAtTheMoonViewController.swift in Sources */,
 				08CC45DA2224CEF200484D37 /* BackgroundViewController.swift in Sources */,
 				371107A1222C71B200BADABF /* ShopViewController.swift in Sources */,
