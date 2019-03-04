@@ -8,12 +8,18 @@
 
 import UIKit
 
+var detailCategory = SongCategory()
+
 class ShopViewController: HowlAtTheMoonViewController {
 
+    let store = DataStore.sharedInstance
+    
+    var spinner: UIActivityIndicatorView!
+    
     let cellId = "cellId"
 
-    let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 24)
-    let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 24)
+    let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
+    let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,6 +34,15 @@ class ShopViewController: HowlAtTheMoonViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        store.categories = []
+        store.getCategories(url: "") {
+            DispatchQueue.main.async {
+                self.spinner.startAnimating()
+                self.collectionView.reloadSections(IndexSet(integer: 0))
+                self.spinner.stopAnimating()
+            }
+        }
+        
         with(checkoutButton) {
             $0.text = "Checkout & Complete Playlist"
 
@@ -35,7 +50,7 @@ class ShopViewController: HowlAtTheMoonViewController {
             view.addSubview($0)
 
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(-175)
+                $0.trailing.equalTo(-50)
                 $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
             }
         }
@@ -47,7 +62,7 @@ class ShopViewController: HowlAtTheMoonViewController {
             view.addSubview($0)
 
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-100)
+                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-75)
                 $0.centerY.equalTo(checkoutButton)
             }
         }
@@ -70,7 +85,7 @@ class ShopViewController: HowlAtTheMoonViewController {
 
 extension ShopViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return store.categories.count
     }
 
 
@@ -79,14 +94,18 @@ extension ShopViewController: UICollectionViewDataSource, UICollectionViewDelega
 
         cell.backgroundColor = .clear
 
-        cell.text = "Classic Pop/Rock"
-        cell.image = UIImage(named: "exampleImage")
+        cell.text = store.categories[indexPath.row].name
+        cell.image = store.categories[indexPath.row].image
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: 450, height: 650)
+        return CGSize(width: 300, height: 433)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        detailCategory = store.categories[indexPath.row]
     }
 }
 
@@ -118,7 +137,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
 
             $0.snp.makeConstraints {
                 $0.top.leading.trailing.equalTo(self)
-                $0.height.equalTo(450)
+                $0.height.equalTo(300)
             }
         }
 

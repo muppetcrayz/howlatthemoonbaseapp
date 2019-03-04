@@ -3,4 +3,5 @@ target 'howlatthemoon' do
   use_frameworks!
   pod 'SnapKit'
   pod 'PromiseKit'
+  pod 'SwiftyJSON'
 end
