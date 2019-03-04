@@ -20,10 +20,22 @@ class HowlAtTheMoonButton: UIButton {
         }
     }
 
-    init(text: String = "", weight: Weight = .bold) {
+    var weight: Weight = .bold {
+        didSet {
+            titleLabel?.font = UIFont(name: "Oswald-\(weight.rawValue)", size: size)
+        }
+    }
+
+    var size: CGFloat = 32 {
+        didSet {
+            titleLabel?.font = UIFont(name: "Oswald-\(weight.rawValue)", size: size)
+        }
+    }
+
+    init(text: String = "", weight: Weight = .bold, size: CGFloat = 32) {
         super.init(frame: .zero)
 
-        titleLabel?.font = UIFont(name: "Oswald-\(weight.rawValue)", size: 32)
+        titleLabel?.font = UIFont(name: "Oswald-\(weight.rawValue)", size: size)
 
         setTitle(text.uppercased(), for: .normal)
         setTitleColor(.white, for: .normal)

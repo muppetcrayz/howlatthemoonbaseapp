@@ -12,6 +12,9 @@ class ShopViewController: HowlAtTheMoonViewController {
 
     let cellId = "cellId"
 
+    let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 24)
+    let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 24)
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -24,6 +27,30 @@ class ShopViewController: HowlAtTheMoonViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        with(checkoutButton) {
+            $0.text = "Checkout & Complete Playlist"
+
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+
+            $0.snp.makeConstraints {
+                $0.trailing.equalTo(-175)
+                $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
+            }
+        }
+
+        with(yourPlaylistButton) {
+            $0.text = "Your Playlist: 0"
+
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+
+            $0.snp.makeConstraints {
+                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-100)
+                $0.centerY.equalTo(checkoutButton)
+            }
+        }
 
         with(collectionView) {
             view.addSubview($0)
