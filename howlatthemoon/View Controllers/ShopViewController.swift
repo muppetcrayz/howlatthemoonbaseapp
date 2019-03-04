@@ -14,7 +14,7 @@ class ShopViewController: HowlAtTheMoonViewController {
 
     let store = DataStore.sharedInstance
     
-    var spinner: UIActivityIndicatorView!
+//    var spinner: UIActivityIndicatorView!
     
     let cellId = "cellId"
 
@@ -35,11 +35,11 @@ class ShopViewController: HowlAtTheMoonViewController {
         super.viewDidLoad()
 
         store.categories = []
-        store.getCategories(url: "") {
+        store.getCategories(url: API.Products.listURL) {
             DispatchQueue.main.async {
-                self.spinner.startAnimating()
+//                self.spinner.startAnimating()
                 self.collectionView.reloadSections(IndexSet(integer: 0))
-                self.spinner.stopAnimating()
+//                self.spinner.stopAnimating()
             }
         }
         
@@ -95,7 +95,7 @@ extension ShopViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.backgroundColor = .clear
 
         cell.text = store.categories[indexPath.row].name
-        cell.image = store.categories[indexPath.row].image
+        cell.image = store.categories[indexPath.row].getCategoryPicture()
         return cell
     }
 
@@ -106,6 +106,12 @@ extension ShopViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         detailCategory = store.categories[indexPath.row]
+        let detailViewController = DetailViewController()
+        
+        fadeAwayAndDismiss()
+            .done {
+                backgroundViewController.present(detailViewController, animated: false)
+        }
     }
 }
 

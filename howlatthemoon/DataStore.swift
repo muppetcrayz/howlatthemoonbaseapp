@@ -22,8 +22,10 @@ final class DataStore {
             if let results = json {
                 for dict in results {
                     if let newCategory = SongCategory(dictionary: dict) {
-                        // add product if it is valid (ex. price exists) q
-                        self.products.append(newCategory)
+                        if (newCategory.name != "Uncategorized") {
+                            // add product if it is valid (ex. price exists) q
+                            self.categories.append(newCategory)
+                        }
                     }
                 }
                 completion()

@@ -16,3 +16,19 @@ extension CGFloat {
 extension Double {
     static let standardiOSAnimationDuration: Double = 0.33
 }
+
+enum API {
+    static let baseURL = "https://requestatthemoon.com"
+    static let consumerKey = "ck_89cd5194afe9c715c2ad8583170f8d9d9ab8f2c1"
+    static let consumerSecret = "cs_f871b1a3cd1cb88e6e7bc7a01f809d720add75fc"
+    
+    static func urlParameterStringFor(consumerKey: String, consumerSecret: String) -> String {
+        return "consumer_key=\(consumerKey)&consumer_secret=\(consumerSecret)"
+    }
+    
+    enum Products {
+        static let baseURL = "\(API.baseURL)/wp-json/wc/v3/products/categories"
+        
+        static let listURL = "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100"
+    }
+}

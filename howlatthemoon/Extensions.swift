@@ -45,3 +45,14 @@ extension UIControl {
         objc_setAssociatedObject(self, String(format: "[%d]", arc4random()), sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
     }
 }
+
+extension String {
+        var htmlDecoded: String {
+                let decoded = try? NSAttributedString(data: Data(utf8), options: [
+                        .documentType: NSAttributedString.DocumentType.html,
+                        .characterEncoding: String.Encoding.utf8.rawValue
+                ], documentAttributes: nil).string
+
+                return decoded ?? self
+        }
+}

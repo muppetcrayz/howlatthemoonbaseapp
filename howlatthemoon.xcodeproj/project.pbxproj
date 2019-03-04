@@ -10,6 +10,7 @@
 		08A0E628222CB08200463481 /* SongCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0E627222CB08200463481 /* SongCategory.swift */; };
 		08A0E62A222CB1B100463481 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0E629222CB1B100463481 /* DataStore.swift */; };
 		08A0E62C222CB1D800463481 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0E62B222CB1D800463481 /* APIClient.swift */; };
+		08A0E62E222CBFFB00463481 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0E62D222CBFFB00463481 /* DetailViewController.swift */; };
 		08BB852C222324CC000E918A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB852B222324CC000E918A /* AppDelegate.swift */; };
 		08BB852E222324CC000E918A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB852D222324CC000E918A /* WelcomeViewController.swift */; };
 		08BB8533222324CE000E918A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BB8532222324CE000E918A /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		08A0E627222CB08200463481 /* SongCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCategory.swift; sourceTree = "<group>"; };
 		08A0E629222CB1B100463481 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		08A0E62B222CB1D800463481 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		08A0E62D222CBFFB00463481 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		08BB8528222324CC000E918A /* howlatthemoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = howlatthemoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BB852B222324CC000E918A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08BB852D222324CC000E918A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */,
 				08BB852D222324CC000E918A /* WelcomeViewController.swift */,
 				371107A0222C71B200BADABF /* ShopViewController.swift */,
+				08A0E62D222CBFFB00463481 /* DetailViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				08A0E628222CB08200463481 /* SongCategory.swift in Sources */,
 				3796886D222C5C4B006C2619 /* Constants.swift in Sources */,
 				374B50F1222C949A00F301D9 /* HowlAtTheMoonButton.swift in Sources */,
+				08A0E62E222CBFFB00463481 /* DetailViewController.swift in Sources */,
 				08A0E62A222CB1B100463481 /* DataStore.swift in Sources */,
 				371107A5222C79D600BADABF /* HowlAtTheMoonViewController.swift in Sources */,
 				08A0E62C222CB1D800463481 /* APIClient.swift in Sources */,

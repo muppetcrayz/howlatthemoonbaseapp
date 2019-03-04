@@ -13,20 +13,28 @@ class SongCategory {
     var id: Int
     var name: String
     var image: String
-    var price: Double
     
     init() {
         self.id = 0
         self.name = ""
         self.image = ""
-        self.price = 0.0
     }
     
     init?(dictionary: CategoryJSON) {
+        self.id = dictionary["id"] as! Int
+        self.name = dictionary["name"] as! String
+        self.name = self.name.htmlDecoded
+        
+        if let image = dictionary["image"] as? CategoryJSON {
+            self.image = image["src"] as! String
+        }
+        else {
+            self.image = ""
+        }
         
     }
     
-    func getProductPictures() -> UIImage {
+    func getCategoryPicture() -> UIImage {
         var pic: UIImage? = nil
         let web = URL(string: self.image)
         let data = try? Data(contentsOf: web!)
