@@ -128,6 +128,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.backgroundColor = .clear
         
         cell.image = UIImage(named: "exampleDetailImage")
+        cell.title = "Twist and Shout"
         return cell
     }
     
@@ -163,10 +164,26 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
 
 class ImageViewCell: UICollectionViewCell {
     let imageView = UIImageView()
+    let titleOverlay = UIView()
+    let bottomOverlay = UIView()
     
     var image: UIImage? {
         didSet {
-            imageView.image = image
+            imageView.image = image?.aspectFitImage(inRect: self.bounds)
+        }
+    }
+    
+    var title: String = "" {
+        didSet {
+            let label = UILabel()
+            label.text = title
+            label.textAlignment = .center
+            label.textColor = UIColor.white
+            titleOverlay.addSubview(label)
+            
+            label.snp.makeConstraints {
+                $0.edges.equalTo(titleOverlay)
+            }
         }
     }
     
@@ -175,11 +192,39 @@ class ImageViewCell: UICollectionViewCell {
         
         with(imageView) {
             $0.contentMode = .scaleAspectFit
+            $0.sizeToFit()
             
             addSubview($0)
             
             $0.snp.makeConstraints {
-                $0.edges.equalTo(self)
+                $0.top.equalTo(self)
+                $0.width.equalTo(self)
+            }
+        }
+        
+        with(titleOverlay) {
+            $0.contentMode = .scaleAspectFit
+            $0.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
+            
+            addSubview($0)
+            
+            $0.snp.makeConstraints {
+                $0.top.equalTo(self)
+                $0.height.equalTo(50)
+                $0.width.equalTo(self)
+            }
+        }
+        
+        with(bottomOverlay) {
+            $0.contentMode = .scaleAspectFit
+            $0.backgroundColor = UIColor.init(red: 75, green: 166, blue: 159, alpha: 0.6)
+            
+            addSubview($0)
+            
+            $0.snp.makeConstraints {
+                $0.bottom.equalTo(imageView)
+                $0.height.equalTo(50)
+                $0.width.equalTo(self)
             }
         }
 
