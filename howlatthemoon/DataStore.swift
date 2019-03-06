@@ -15,6 +15,7 @@ final class DataStore {
     fileprivate init() {}
     
     var categories: [SongCategory] = []
+    var songs: [Song] = []
     
     func getCategories(url: String, completion: @escaping () -> Void) {
         
@@ -26,6 +27,20 @@ final class DataStore {
                             // add product if it is valid (ex. price exists) q
                             self.categories.append(newCategory)
                         }
+                    }
+                }
+                completion()
+            }
+        }
+    }
+    
+    func getSongs(url: String, completion: @escaping () -> Void) {
+        
+        APIClient.getSongs(url: url) { (json) in
+            if let results = json {
+                for dict in results {
+                    if let newSong = Song(dictionary: dict) {
+                        self.songs.append(newSong)
                     }
                 }
                 completion()

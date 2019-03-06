@@ -14,8 +14,6 @@ class ShopViewController: HowlAtTheMoonViewController {
 
     let store = DataStore.sharedInstance
     
-//    var spinner: UIActivityIndicatorView!
-    
     let cellId = "cellId"
 
     let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
@@ -35,7 +33,7 @@ class ShopViewController: HowlAtTheMoonViewController {
         super.viewDidLoad()
 
         store.categories = []
-        store.getCategories(url: API.Products.listURL) {
+        store.getCategories(url: API.Categories.listURL) {
             DispatchQueue.main.async {
 //                self.spinner.startAnimating()
                 self.collectionView.reloadSections(IndexSet(integer: 0))
@@ -48,6 +46,15 @@ class ShopViewController: HowlAtTheMoonViewController {
 
             $0.usesAutoLayout = true
             view.addSubview($0)
+            
+            $0.addAction(for: .touchUpInside) {
+                let cartViewController = CartViewController()
+                
+                self.fadeAwayAndDismiss()
+                    .done {
+                        backgroundViewController.present(cartViewController, animated: false)
+                }
+            }
 
             $0.snp.makeConstraints {
                 $0.trailing.equalTo(-50)
@@ -56,7 +63,7 @@ class ShopViewController: HowlAtTheMoonViewController {
         }
 
         with(yourPlaylistButton) {
-            $0.text = "Your Playlist: 0"
+            $0.text = "Your Playlist: " + playlist.count.description
 
             $0.usesAutoLayout = true
             view.addSubview($0)

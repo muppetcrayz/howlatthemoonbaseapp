@@ -26,9 +26,17 @@ enum API {
         return "consumer_key=\(consumerKey)&consumer_secret=\(consumerSecret)"
     }
     
-    enum Products {
+    enum Categories {
         static let baseURL = "\(API.baseURL)/wp-json/wc/v3/products/categories"
         
         static let listURL = "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100"
+    }
+    
+    enum Songs {
+        static let baseURL = "\(API.baseURL)/wp-json/wc/v3/products"
+        
+        static func songURL(category: Int) -> String {
+            return "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100&category=" + category.description
+        }
     }
 }

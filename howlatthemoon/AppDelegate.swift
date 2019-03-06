@@ -9,6 +9,7 @@
 import UIKit
 
 let backgroundViewController = BackgroundViewController()
+var playlist : [Song] = []
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

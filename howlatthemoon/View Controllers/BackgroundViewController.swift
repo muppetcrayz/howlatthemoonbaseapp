@@ -12,6 +12,8 @@ import SnapKit
 class BackgroundViewController: UIViewController {
     let backgroundImageView = UIImageView(image: UIImage(named: "partypic2"))
     let logoImageView = UIImageView(image: UIImage(named: "logo"))
+    
+    let logoTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(logoTapped))
 
     let backgroundFadeView = UIView()
     let topFadeView = UIView()
@@ -55,6 +57,9 @@ class BackgroundViewController: UIViewController {
                 $0.width.equalTo(264)
                 $0.height.equalTo(130)
             }
+            
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(logoTapGestureRecognizer)
         }
 
         with(topFadeView) {
@@ -71,4 +76,12 @@ class BackgroundViewController: UIViewController {
         }
     }
 
+    @objc func logoTapped() {
+        let shopViewController = ShopViewController()
+        
+        (presentedViewController as? HowlAtTheMoonViewController)?.fadeAwayAndDismiss()
+        .done {
+            backgroundViewController.present(shopViewController, animated: false)
+        }
+    }
 }

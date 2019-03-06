@@ -4,4 +4,5 @@ target 'howlatthemoon' do
   pod 'SnapKit'
   pod 'PromiseKit'
   pod 'SwiftyJSON'
+  pod 'SwiftRichString'
 end

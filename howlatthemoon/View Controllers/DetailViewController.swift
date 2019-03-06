@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import SwiftRichString
 
 class DetailViewController: HowlAtTheMoonViewController {
+    
+    let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
+    let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -18,7 +23,6 @@ class DetailViewController: HowlAtTheMoonViewController {
         newCollectionView.isScrollEnabled = true
         return newCollectionView
     }()
-//    let scrollView = UIScrollView(frame: .zero)
 
     let image = UIImage(named: "exampleDetailImage")!
 
@@ -26,36 +30,53 @@ class DetailViewController: HowlAtTheMoonViewController {
     let nextButton = UIButton(type: .custom)
     
     let cellId = "ImageCell"
+    
+    let store = DataStore.sharedInstance
+    
+    let logoInvisibleButton = UIButton(type: .custom)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        with(scrollView) {
-//            $0.isPagingEnabled = true
-//
-//            (0...8).forEach { i in
-//
-//                let imageView = UIImageView(image: image)
-//
-//                scrollView.addSubview(imageView)
-//
-//                imageView.snp.makeConstraints {
-//                    $0.width.equalTo(scrollView).multipliedBy(0.3)
-//                    $0.height.equalTo(imageView.snp.width).multipliedBy(1.4606060606)
-//                    $0.centerX.equalTo(scrollView).multipliedBy(0.3 + (CGFloat(i) * 0.75) + ((CGFloat(i) / 3) * -0.1))
-//                    $0.top.equalTo(scrollView)
-//                }
-//            }
-//
-//            view.addSubview($0)
-//            $0.snp.makeConstraints {
-//                $0.top.equalTo(view.safeAreaLayoutGuide).offset(225)
-//                $0.centerX.equalTo(view.safeAreaLayoutGuide)
-//                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(150)
-//                $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-150)
-//                $0.bottom.equalTo(view)
-//            }
-//        }
+        
+        store.songs = []
+        store.getSongs(url: API.Songs.songURL(category: detailCategory.id)) {
+            DispatchQueue.main.async {
+                self.collectionView.reloadSections(IndexSet(integer: 0))
+            }
+        }
+        
+        with(checkoutButton) {
+            $0.text = "Checkout & Complete Playlist"
+            
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+            
+            $0.addAction(for: .touchUpInside) {
+                let cartViewController = CartViewController()
+                
+                self.fadeAwayAndDismiss()
+                    .done {
+                        backgroundViewController.present(cartViewController, animated: false)
+                }
+            }
+            
+            $0.snp.makeConstraints {
+                $0.trailing.equalTo(-50)
+                $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
+            }
+        }
+        
+        with(yourPlaylistButton) {
+            $0.text = "Your Playlist: " + playlist.count.description
+            
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+            
+            $0.snp.makeConstraints {
+                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-75)
+                $0.centerY.equalTo(checkoutButton)
+            }
+        }
         
         with(collectionView) {
             view.addSubview($0)
@@ -100,25 +121,35 @@ class DetailViewController: HowlAtTheMoonViewController {
                 $0.width.height.equalTo(100)
             }
         }
+        
+        with(logoInvisibleButton) {
+            $0.addAction(for: .touchUpInside) {
+                let shopViewcontroller = ShopViewController()
+                
+                self.fadeAwayAndDismiss()
+                .done {
+                    backgroundViewController.present(shopViewcontroller, animated: false)
+                }
+            }
+            
+            view.addSubview($0)
+            
+            $0.snp.makeConstraints {
+                $0.top.equalTo(view.safeAreaLayoutGuide).offset(2 * CGFloat.standardiOSSpacing)
+                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(150)
+                
+                $0.width.equalTo(264)
+                $0.height.equalTo(130)
+            }
+        }
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return store.songs.count
     }
     
     
@@ -127,13 +158,25 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         
         cell.backgroundColor = .clear
         
-        cell.image = UIImage(named: "exampleDetailImage")
-        cell.title = "Twist and Shout"
+        cell.title = store.songs[indexPath.row].name
+        cell.image = store.songs[indexPath.row].getSongPicture()
+        cell.clipsToBounds = true
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        playlist.append(store.songs[indexPath.row])
+        with(yourPlaylistButton) {
+            $0.text = "Your Playlist: " + playlist.count.description
+            
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+            
+            $0.snp.makeConstraints {
+                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-75)
+                $0.centerY.equalTo(checkoutButton)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -160,12 +203,14 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
         
     }
+    
 }
 
 class ImageViewCell: UICollectionViewCell {
     let imageView = UIImageView()
     let titleOverlay = UIView()
     let bottomOverlay = UIView()
+    let label = UILabel()
     
     var image: UIImage? {
         didSet {
@@ -175,10 +220,25 @@ class ImageViewCell: UICollectionViewCell {
     
     var title: String = "" {
         didSet {
-            let label = UILabel()
-            label.text = title
+            // Create your own styles
+            
+            let normal = Style {
+                $0.font = SystemFonts.Helvetica.font(size: 24)
+            }
+            
+            let italic = normal.byAdding {
+                $0.traitVariants = .italic
+                $0.font = SystemFonts.Helvetica.font(size: 16)
+            }
+            
+            // Create a group which contains your style, each identified by a tag.
+            let myGroup = StyleGroup(base: normal, ["i": italic])
+            
+            label.attributedText = title.set(style: myGroup)
             label.textAlignment = .center
             label.textColor = UIColor.white
+            label.lineBreakMode = .byWordWrapping
+            label.numberOfLines = 0
             titleOverlay.addSubview(label)
             
             label.snp.makeConstraints {
@@ -191,14 +251,13 @@ class ImageViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         with(imageView) {
-            $0.contentMode = .scaleAspectFit
-            $0.sizeToFit()
+            
+            $0.contentMode = .scaleToFill
             
             addSubview($0)
             
             $0.snp.makeConstraints {
                 $0.top.equalTo(self)
-                $0.width.equalTo(self)
             }
         }
         
@@ -210,14 +269,14 @@ class ImageViewCell: UICollectionViewCell {
             
             $0.snp.makeConstraints {
                 $0.top.equalTo(self)
-                $0.height.equalTo(50)
+                $0.height.equalTo(75)
                 $0.width.equalTo(self)
             }
         }
         
         with(bottomOverlay) {
             $0.contentMode = .scaleAspectFit
-            $0.backgroundColor = UIColor.init(red: 75, green: 166, blue: 159, alpha: 0.6)
+            $0.backgroundColor = UIColor.init(red: 0.294, green: 0.651, blue: 0.624, alpha: 0.6)
             
             addSubview($0)
             
@@ -226,6 +285,17 @@ class ImageViewCell: UICollectionViewCell {
                 $0.height.equalTo(50)
                 $0.width.equalTo(self)
             }
+            
+            let label = UILabel()
+            label.text = "ADD TO PLAYLIST"
+            label.font = Font.systemFont(ofSize: 24)
+            label.textAlignment = .center
+            label.textColor = UIColor.white
+            bottomOverlay.addSubview(label)
+            
+            label.snp.makeConstraints {
+                $0.edges.equalTo(bottomOverlay)
+            }
         }
 
     }
@@ -233,4 +303,9 @@ class ImageViewCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        label.text = ""
+    }
+
 }
