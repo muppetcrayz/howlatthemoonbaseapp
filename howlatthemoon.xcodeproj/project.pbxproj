@@ -41,6 +41,8 @@
 		3796888A222C61F9006C2619 /* Oswald-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3796887B222C61F9006C2619 /* Oswald-MediumItalic.ttf */; };
 		3796888B222C61F9006C2619 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3796887C222C61F9006C2619 /* Oswald-Bold.ttf */; };
 		3796888C222C61F9006C2619 /* Oswald-Stencil.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3796887D222C61F9006C2619 /* Oswald-Stencil.ttf */; };
+		37A2D14A222F82F400AD94DF /* CartItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2D149222F82F400AD94DF /* CartItemTableViewCell.swift */; };
+		37A2D14C222F8BC800AD94DF /* CartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A2D14B222F8BC800AD94DF /* CartHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,8 @@
 		3796887B222C61F9006C2619 /* Oswald-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-MediumItalic.ttf"; sourceTree = "<group>"; };
 		3796887C222C61F9006C2619 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		3796887D222C61F9006C2619 /* Oswald-Stencil.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Stencil.ttf"; sourceTree = "<group>"; };
+		37A2D149222F82F400AD94DF /* CartItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemTableViewCell.swift; sourceTree = "<group>"; };
+		37A2D14B222F8BC800AD94DF /* CartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartHeaderView.swift; sourceTree = "<group>"; };
 		D7CFA02B5A8C2E790076AA24 /* Pods-howlatthemoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-howlatthemoon.release.xcconfig"; path = "Pods/Target Support Files/Pods-howlatthemoon/Pods-howlatthemoon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				374B50F0222C949A00F301D9 /* HowlAtTheMoonButton.swift */,
+				37A2D14B222F8BC800AD94DF /* CartHeaderView.swift */,
+				37A2D149222F82F400AD94DF /* CartItemTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,6 +395,7 @@
 			files = (
 				08A0E628222CB08200463481 /* SongCategory.swift in Sources */,
 				3796886D222C5C4B006C2619 /* Constants.swift in Sources */,
+				37A2D14A222F82F400AD94DF /* CartItemTableViewCell.swift in Sources */,
 				083A17D8222F5E2100BB0D19 /* CartViewController.swift in Sources */,
 				374B50F1222C949A00F301D9 /* HowlAtTheMoonButton.swift in Sources */,
 				08A0E62E222CBFFB00463481 /* DetailViewController.swift in Sources */,
@@ -399,6 +406,7 @@
 				08CC45DA2224CEF200484D37 /* BackgroundViewController.swift in Sources */,
 				371107A1222C71B200BADABF /* ShopViewController.swift in Sources */,
 				08BB852E222324CC000E918A /* WelcomeViewController.swift in Sources */,
+				37A2D14C222F8BC800AD94DF /* CartHeaderView.swift in Sources */,
 				08BB852C222324CC000E918A /* AppDelegate.swift in Sources */,
 				083A17D6222F4EBF00BB0D19 /* Song.swift in Sources */,
 				3796886B222C4FEF006C2619 /* Extensions.swift in Sources */,
@@ -566,7 +574,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sageconger.howlatthemoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -585,7 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sageconger.howlatthemoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

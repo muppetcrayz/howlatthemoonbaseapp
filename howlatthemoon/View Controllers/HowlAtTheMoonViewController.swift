@@ -34,7 +34,7 @@ class HowlAtTheMoonViewController: UIViewController {
     }
 
     func fadeAwayAndDismiss() -> Guarantee<Void> {
-        return UIView.animate(.promise, duration: .standardiOSAnimationDuration) { [weak self] in
+        return UIView.animate(.promise, duration: .standardiOSAnimationDuration / 2) { [weak self] in
             self?.view.alpha = 0.0
         }
         .then { _ in

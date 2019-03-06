@@ -10,7 +10,8 @@ import UIKit
 import SwiftRichString
 
 class CartViewController: HowlAtTheMoonViewController {
-    
+    let cellId = "cellId"
+
     let logoInvisibleButton = UIButton(type: .custom)
     let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
     let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
@@ -77,7 +78,10 @@ class CartViewController: HowlAtTheMoonViewController {
         }
         
         with(tableView) {
-            
+            $0.dataSource = self
+            $0.delegate = self
+            $0.register(CartItemTableViewCell.self, forCellReuseIdentifier: cellId)
+
             view.addSubview($0)
             
             $0.snp.makeConstraints {
@@ -166,5 +170,35 @@ class CartViewController: HowlAtTheMoonViewController {
                 $0.leading.equalTo(view.safeAreaLayoutGuide).offset(175)
             }
         }
+    }
+}
+
+extension CartViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CartItemTableViewCell
+
+        cell.albumArtImage = UIImage(named: "exampleDetailImage")
+        cell.productName = "Thing"
+        cell.price = 5
+        cell.quantity = 2
+        cell.total = 2
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = CartHeaderView(reuseIdentifier: "")
+        
+        headerView.titleLabel.text = "Thing"
+
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
