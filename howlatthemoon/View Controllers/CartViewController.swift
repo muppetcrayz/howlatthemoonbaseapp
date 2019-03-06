@@ -16,7 +16,7 @@ class CartViewController: HowlAtTheMoonViewController {
     let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
     let tableView = UITableView()
     let totalView = UIView()
-    let proceedToCheckoutButton = HowlAtTheMoonButton(text: "Proceed to Checkout ->", size: 16)
+    let proceedToCheckoutButton = HowlAtTheMoonButton(text: "Proceed to Checkout →", size: 16)
     let backButton = HowlAtTheMoonButton(text: "Continue Browsing", size: 16)
     
     override func viewDidLoad() {
