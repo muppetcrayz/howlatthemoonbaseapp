@@ -19,7 +19,8 @@ class CartHeaderView: UITableViewHeaderFooterView {
         
         with(productLabel) {
             $0.text = "Name"
-            
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {
@@ -33,7 +34,8 @@ class CartHeaderView: UITableViewHeaderFooterView {
         
         with(priceLabel) {
             $0.text = "Price"
-            
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {
@@ -47,7 +49,8 @@ class CartHeaderView: UITableViewHeaderFooterView {
         
         with(quantityLabel) {
             $0.text = "Quantity"
-            
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {
@@ -60,7 +63,8 @@ class CartHeaderView: UITableViewHeaderFooterView {
         
         with(totalLabel) {
             $0.text = "Total"
-            
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {

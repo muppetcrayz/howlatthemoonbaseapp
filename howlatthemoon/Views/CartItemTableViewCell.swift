@@ -56,6 +56,7 @@ class CartItemTableViewCell: UITableViewCell {
 
         with(removeButton) {
             $0.setImage(UIImage.init(named: "remove"), for: .normal)
+            $0.usesAutoLayout = true
             addSubview($0)
             $0.addAction(for: .touchUpInside) {
                 self.deleteTapHandler()
@@ -71,6 +72,7 @@ class CartItemTableViewCell: UITableViewCell {
         with(albumArtImageView) {
             $0.image = albumArtImage
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
@@ -86,6 +88,7 @@ class CartItemTableViewCell: UITableViewCell {
 
             setUpLabelFormatting(for: $0)
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
@@ -102,6 +105,7 @@ class CartItemTableViewCell: UITableViewCell {
 
             setUpLabelFormatting(for: $0)
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
@@ -124,6 +128,7 @@ class CartItemTableViewCell: UITableViewCell {
                 self.totalLabel.text = "$\(Int(self.quantityStepper.value * 5)).00"
             }
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
@@ -137,6 +142,7 @@ class CartItemTableViewCell: UITableViewCell {
 
             $0.text = "\(Int(quantityStepper.value))"
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
@@ -152,6 +158,7 @@ class CartItemTableViewCell: UITableViewCell {
 
             $0.text = "$\(total).00"
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
