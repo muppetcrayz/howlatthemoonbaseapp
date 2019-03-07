@@ -165,7 +165,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        playlist.append(store.songs[indexPath.row])
+        playlist.append((store.songs[indexPath.row], 1))
         with(yourPlaylistButton) {
             $0.text = "Your Playlist: " + playlist.count.description
             

@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SquareInAppPaymentsSDK
 
 let backgroundViewController = BackgroundViewController()
-var playlist : [Song] = []
+var playlist : [(Song, Int)] = []
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let welcomeViewController = WelcomeViewController()
         backgroundViewController.present(welcomeViewController, animated: false)
 
+        // TODO: real value
+        SQIPInAppPaymentsSDK.squareApplicationID = "sandbox-sq0idp-f1NGAQ1RdWHWVyFp-E4hdA"
+        
         return true
     }
 

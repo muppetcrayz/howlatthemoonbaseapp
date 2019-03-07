@@ -39,4 +39,14 @@ enum API {
             return "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100&category=" + category.description
         }
     }
+    
+    enum Transactions {
+        // TODO: put location
+        static let baseURL = "https://connect.squareup.com/v2/locations/CBASEPjYieIID0t4z7mgJmJI--kgAQ/transactions"
+        
+    }
+    
+    enum Orders {
+        static let loadURL = "\(API.baseURL)/wp-json/wc/v2/orders?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))"
+    }
 }
