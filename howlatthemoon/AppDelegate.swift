@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SquareInAppPaymentsSDK
+import SquareReaderSDK
 
 let backgroundViewController = BackgroundViewController()
 var playlist : [(Song, Int)] = []
@@ -24,9 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let welcomeViewController = WelcomeViewController()
         backgroundViewController.present(welcomeViewController, animated: false)
-
-        // TODO: real value
-        SQIPInAppPaymentsSDK.squareApplicationID = "sandbox-sq0idp-f1NGAQ1RdWHWVyFp-E4hdA"
+        
+        SQRDReaderSDK.initialize(applicationLaunchOptions: launchOptions)
+        authorizeReaderSDKIfNeeded()
         
         return true
     }
@@ -53,6 +53,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func retrieveAuthorizationCode() -> String {
+        // TODO: Add code to retrieve a mobile authorization code.
+        return "sq0acp-ath1DL4penE3FnzSQWrhVYiTQDabl2dG_FKkuQLp1tY"
+    }
+    
+    func authorizeReaderSDKIfNeeded() {
+        
+        if SQRDReaderSDK.shared.isAuthorized {
+            print("Already authorized.")
+        }
+        else {
+            let authCode = retrieveAuthorizationCode()
+            SQRDReaderSDK.shared.authorize(withCode: authCode) { location, error in
+                
+                if let authError = error {
+                    // Handle the error
+                    print(authError)
+                }
+                else {
+                    print("Authorized!")
+                }
+            }
+        }
+    }
 
 }
 

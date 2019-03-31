@@ -1,7 +1,4 @@
 PODS:
-  - CreditCardRow (3.1.0):
-    - Eureka (~> 4.0)
-  - Eureka (4.3.1)
   - PromiseKit (6.8.3):
     - PromiseKit/CorePromise (= 6.8.3)
     - PromiseKit/Foundation (= 6.8.3)
@@ -12,38 +9,28 @@ PODS:
   - PromiseKit/UIKit (6.8.3):
     - PromiseKit/CorePromise
   - SnapKit (4.2.0)
-  - SquareInAppPaymentsSDK (1.1.0)
   - SwiftRichString (2.1.0)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
-  - CreditCardRow
-  - Eureka
   - PromiseKit
   - SnapKit
-  - SquareInAppPaymentsSDK
   - SwiftRichString
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - CreditCardRow
-    - Eureka
     - PromiseKit
     - SnapKit
-    - SquareInAppPaymentsSDK
     - SwiftRichString
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  CreditCardRow: 25aa67be9e27f3c1e6f225d5419aab2f465baa74
-  Eureka: 28ea296f06710f6745266b71f17862048941a32d
   PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
-  SquareInAppPaymentsSDK: c05efe46871f2cfbfef2689744bbf4a493a14c1f
   SwiftRichString: 810a93f438ee273619d0023c389584d6aeef015d
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 8e570ca83e780b78bf9fbca15fac97087d31fd5a
+PODFILE CHECKSUM: 11c7818d79afbc67f9a95815c7fee145c6c217bb
 
 COCOAPODS: 1.5.3

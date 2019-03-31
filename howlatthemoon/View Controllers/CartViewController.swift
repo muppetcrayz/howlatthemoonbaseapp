@@ -8,12 +8,14 @@
 
 import UIKit
 import SwiftRichString
-import SquareInAppPaymentsSDK
+import SquareReaderSDK
 import SwiftyJSON
+import AVFoundation
+import CoreLocation
 
 var total = 0.0
 
-class CartViewController: HowlAtTheMoonViewController, SQIPCardEntryViewControllerDelegate {
+class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDelegate, SQRDReaderSettingsControllerDelegate {
     let cellId = "cellId"
 
     let logoInvisibleButton = UIButton(type: .custom)
@@ -24,9 +26,14 @@ class CartViewController: HowlAtTheMoonViewController, SQIPCardEntryViewControll
     let proceedToCheckoutButton = HowlAtTheMoonButton(text: "Proceed to Checkout →", size: 16)
     let backButton = HowlAtTheMoonButton(text: "Continue Browsing", size: 16)
     let label = UILabel()
+    private lazy var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        requestLocationPermission()
+        requestMicrophonePermission()
+        pairCardReaders()
         
         for _ in playlist {
             let x = removeDuplicates()
@@ -148,7 +155,7 @@ class CartViewController: HowlAtTheMoonViewController, SQIPCardEntryViewControll
             view.addSubview($0)
             
             $0.addAction(for: .touchUpInside) {
-                self.showCardEntryForm()
+                self.startCheckout()
             }
             
             $0.snp.makeConstraints {
@@ -177,84 +184,6 @@ class CartViewController: HowlAtTheMoonViewController, SQIPCardEntryViewControll
                 $0.leading.equalTo(view.safeAreaLayoutGuide).offset(175)
             }
         }
-    }
-    
-    func cardEntryViewController(_ cardEntryViewController: SQIPCardEntryViewController, didObtain cardDetails: SQIPCardDetails, completionHandler: @escaping (Error?) -> Void) {
-        
-        let headers = [
-            "Authorization": "Bearer EAAAEPh1McFlzNZR3m7Ev7SW36wElAiQEJSM63GGpw2peMK0Q2lwe2JygFGSVfHU",
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        ]
-        let parameters = [
-            "idempotency_key": UUID().uuidString,
-            "amount_money": [
-                "amount": total,
-                "currency": "USD"
-            ],
-            "card_nonce": cardDetails.nonce,
-            "delay_capture": false
-            ] as [String : Any]
-        
-            do {
-                let postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-                let request = NSMutableURLRequest(url: NSURL(string: API.Transactions.baseURL)! as URL,
-                                                  cachePolicy: .useProtocolCachePolicy,
-                                                  timeoutInterval: 10.0)
-                request.httpMethod = "POST"
-                request.allHTTPHeaderFields = headers
-                request.httpBody = postData as Data
-                
-                let session = URLSession.shared
-                let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-                    guard let unwrappedData = data else { print("Error unwrapping data"); return }
-                    
-                    do {
-                        let json = try JSON(data: unwrappedData)
-                        print(json)
-                        if (json["transaction"] != .none) {
-                            self.sendToWooCommerce()
-                            playlist = []
-                            completionHandler(nil)
-                        }
-                    } catch {
-                        
-                    }
-                })
-                
-                dataTask.resume()
-            } catch {
-                
-            }
-        
-    }
-    
-    func cardEntryViewController(_ cardEntryViewController: SQIPCardEntryViewController, didCompleteWith status: SQIPCardEntryCompletionStatus) {
-        dismiss(animated: true) {
-            let shopViewcontroller = ShopViewController()
-            
-            
-                self.fadeAwayAndDismiss()
-                    .done {
-                        backgroundViewController.present(shopViewcontroller, animated: false)
-                }
-        }
-    }
-    
-    func showCardEntryForm() {
-        let theme = SQIPTheme()
-        
-        // Customize the card payment form
-        theme.tintColor = .green
-        theme.saveButtonTitle = "Submit"
-        
-        let cardEntryForm = SQIPCardEntryViewController(theme: theme)
-        cardEntryForm.delegate = self
-        
-        // The card entry form should always be displayed in a UINavigationController.
-        // The card entry form can also be pushed onto an existing navigation controller.
-        let navigationController = UINavigationController(rootViewController: cardEntryForm)
-        present(navigationController, animated: true, completion: nil)
     }
     
     func removeDuplicates() -> Int {
@@ -325,6 +254,96 @@ class CartViewController: HowlAtTheMoonViewController, SQIPCardEntryViewControll
         }
         task.resume()
     }
+    
+    func requestLocationPermission() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            self.locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            print("Show UI directing the user to the iOS Settings app")
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("Location services have already been authorized.")
+        }
+    }
+    
+    func requestMicrophonePermission() {
+        // Note: The microphone permission prompt will not be displayed
+        // when running on the simulator
+        AVAudioSession.sharedInstance().requestRecordPermission { authorized in
+            if !authorized {
+                print("Show UI directing the user to the iOS Settings app")
+            }
+        }
+    }
+    
+    func startCheckout() {
+        // Create an amount of money in the currency of the authorized Square account
+        let amountMoney = SQRDMoney(amount: 100)
+        
+        // Create parameters to customize the behavior of the checkout flow.
+        let params = SQRDCheckoutParameters(amountMoney: amountMoney)
+        params.additionalPaymentTypes = [.cash, .manualCardEntry]
+        
+        // Create a checkout controller and call present to start checkout flow.
+        let checkoutController = SQRDCheckoutController(
+            parameters: params,
+            delegate: self)
+        checkoutController.present(from: self)
+    }
+    
+    func checkoutController(
+        _ checkoutController: SQRDCheckoutController,
+        didFinishCheckoutWith result: SQRDCheckoutResult) {
+        // result contains details about the completed checkout
+        print("Checkout completed: \(result.description).")
+    }
+    
+    func checkoutControllerDidCancel(
+        _ checkoutController: SQRDCheckoutController) {
+        print("Checkout cancelled.")
+    }
+    
+    func checkoutController(
+        _ checkoutController: SQRDCheckoutController, didFailWith error: Error) {
+        // Checkout controller errors are always of type SQRDCheckoutControllerError
+        let checkoutControllerError = error as! SQRDCheckoutControllerError
+        
+        switch checkoutControllerError.code {
+        case .sdkNotAuthorized:
+            // Checkout failed because the SDK is not authorized
+            // with a Square merchant account.
+            print("Reader SDK is not authorized.")
+        case .usageError:
+            // Checkout failed due to a usage error. Inspect the userInfo
+            // dictionary for additional information.
+            if let debugMessage = checkoutControllerError.userInfo[SQRDErrorDebugMessageKey],
+                let debugCode = checkoutControllerError.userInfo[SQRDErrorDebugCodeKey] {
+                print(debugCode, debugMessage)
+            }
+        }
+    }
+    
+    func pairCardReaders() {
+        let readerSettingsController = SQRDReaderSettingsController(
+            delegate: self
+        )
+        readerSettingsController.present(from: self)
+    }
+    
+    // MARK: - SQRDReaderSettingsControllerDelegate
+    
+    func readerSettingsControllerDidPresent(
+        _ readerSettingsController: SQRDReaderSettingsController) {
+        print("Reader settings flow presented.")
+    }
+    
+    func readerSettingsController(
+        _ readerSettingsController: SQRDReaderSettingsController,
+        didFailToPresentWith error: Error) {
+        // Handle the error - this example prints the error to the console
+        print(error)
+    }
+    
 }
 
 extension CartViewController: UITableViewDataSource, UITableViewDelegate {
