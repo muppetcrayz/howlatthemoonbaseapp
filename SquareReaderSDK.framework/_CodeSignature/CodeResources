@@ -785,7 +785,7 @@
 		</dict>
 		<key>Frameworks/CorePaymentCard.framework/CorePaymentCard</key>
 		<data>
-		Lsmn0koyyGMnR4GmFqzt1ECXOlw=
+		iay8EdY+WGuLs26GDX56PdPLCkA=
 		</data>
 		<key>Frameworks/CorePaymentCard.framework/CorePaymentCardResources.bundle/CorePaymentCardResources-Info.plist</key>
 		<data>
@@ -818,7 +818,7 @@
 		</data>
 		<key>Frameworks/SquareCore.framework/SquareCore</key>
 		<data>
-		fd6HXsaZmDcCLFbrguiy+IOQJMw=
+		U7nH0ZUcSQ7NYRCSVJRlivlUEkk=
 		</data>
 		<key>Frameworks/SquareCore.framework/SquareCoreResources.bundle/Info.plist</key>
 		<data>
@@ -847,7 +847,7 @@
 		</data>
 		<key>Frameworks/SquareReader.framework/SquareReader</key>
 		<data>
-		oit7rw4DsDUZwkuU7XqrPxnhD5k=
+		zbN9OYa6MG1VZ18MNLKEUaBu/1E=
 		</data>
 		<key>Frameworks/SquareReader.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -23975,11 +23975,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Lsmn0koyyGMnR4GmFqzt1ECXOlw=
+			iay8EdY+WGuLs26GDX56PdPLCkA=
 			</data>
 			<key>hash2</key>
 			<data>
-			MIuwRT3ksrvQFwIXYcNNBqok7VKJxGXCgGEsbKKQejc=
+			7fq1k/Iwc4RDF+irhf+fa7BYaAL4aSUds7OAM8U0lf8=
 			</data>
 		</dict>
 		<key>Frameworks/CorePaymentCard.framework/CorePaymentCardResources.bundle/CorePaymentCardResources-Info.plist</key>
@@ -24054,11 +24054,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fd6HXsaZmDcCLFbrguiy+IOQJMw=
+			U7nH0ZUcSQ7NYRCSVJRlivlUEkk=
 			</data>
 			<key>hash2</key>
 			<data>
-			hjTL09IBvs4IO99AtVd9mCw5xkqVruDwXygP1GLucJ0=
+			7o6jGaLKFLBiySdVYVl7ednpULgHUjNqmcHbApvboiU=
 			</data>
 		</dict>
 		<key>Frameworks/SquareCore.framework/SquareCoreResources.bundle/Info.plist</key>
@@ -24122,11 +24122,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oit7rw4DsDUZwkuU7XqrPxnhD5k=
+			zbN9OYa6MG1VZ18MNLKEUaBu/1E=
 			</data>
 			<key>hash2</key>
 			<data>
-			fNet1Ujxx7Y+kuU6VN7kSbGRVgiglkFlrlqgJ9qhkc8=
+			NPepKcnkTfEEVd+MP6krjIUXci1xbRnaj1OITVfgbxk=
 			</data>
 		</dict>
 		<key>Frameworks/SquareReader.framework/_CodeSignature/CodeResources</key>

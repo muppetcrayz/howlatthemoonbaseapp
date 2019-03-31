@@ -282,11 +282,10 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
     
     func startCheckout() {
         // Create an amount of money in the currency of the authorized Square account
-        let amountMoney = SQRDMoney(amount: 100)
+        let amountMoney = SQRDMoney(amount: Int(total * 100))
         
         // Create parameters to customize the behavior of the checkout flow.
         let params = SQRDCheckoutParameters(amountMoney: amountMoney)
-        params.additionalPaymentTypes = [.cash, .manualCardEntry]
         
         // Create a checkout controller and call present to start checkout flow.
         let checkoutController = SQRDCheckoutController(
@@ -299,7 +298,17 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         _ checkoutController: SQRDCheckoutController,
         didFinishCheckoutWith result: SQRDCheckoutResult) {
         // result contains details about the completed checkout
-        print("Checkout completed: \(result.description).")
+//        if (result.transactionID != nil) {
+            print(result)
+//            sendToWooCommerce()
+//        playlist.removeAll()
+//        let welcomeViewController = WelcomeViewController()
+//
+//        self.fadeAwayAndDismiss()
+//            .done {
+//                backgroundViewController.present(WelcomeViewController, animated: false)
+//        }
+//        }
     }
     
     func checkoutControllerDidCancel(
