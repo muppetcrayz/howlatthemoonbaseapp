@@ -53,7 +53,8 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
                     backgroundViewController.present(shopViewcontroller, animated: false)
                 }
             }
-            
+
+            $0.usesAutoLayout = true
             view.addSubview($0)
             
             $0.snp.makeConstraints {
@@ -103,6 +104,7 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
             $0.delegate = self
             $0.register(CartItemTableViewCell.self, forCellReuseIdentifier: cellId)
 
+            $0.usesAutoLayout = true
             view.addSubview($0)
             
             $0.snp.makeConstraints {
@@ -116,7 +118,8 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         with (totalView) {
             
             $0.backgroundColor = UIColor.white
-            
+
+            $0.usesAutoLayout = true
             view.addSubview($0)
             
             let formatter = NumberFormatter()
@@ -134,6 +137,7 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
             let text = "Total:\t\t\t" + formatter.string(from: total as NSNumber)!
             label.attributedText = text.set(style: myGroup)
             label.textAlignment = .center
+            label.usesAutoLayout = true
             totalView.addSubview(label)
             
             label.snp.makeConstraints {

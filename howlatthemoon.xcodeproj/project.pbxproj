@@ -617,6 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 457Y6A548A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -624,6 +625,9 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SquareReaderSDK.framework/Frameworks",
 				);
+=======
+				DEVELOPMENT_TEAM = E25BK4VCB2;
+>>>>>>> 88fbb101a3f435e8583b4a4f04764327a7fc0a52
 				INFOPLIST_FILE = howlatthemoon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -642,6 +646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 457Y6A548A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -649,6 +654,9 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SquareReaderSDK.framework/Frameworks",
 				);
+=======
+				DEVELOPMENT_TEAM = E25BK4VCB2;
+>>>>>>> 88fbb101a3f435e8583b4a4f04764327a7fc0a52
 				INFOPLIST_FILE = howlatthemoon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

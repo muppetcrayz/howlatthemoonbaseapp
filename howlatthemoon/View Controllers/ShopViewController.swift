@@ -146,6 +146,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
             $0.layer.borderWidth = 2
             $0.layer.borderColor = UIColor.orange.cgColor
 
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {
@@ -155,6 +156,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
         }
 
         with(button) {
+            $0.usesAutoLayout = true
             addSubview($0)
 
             $0.snp.makeConstraints {

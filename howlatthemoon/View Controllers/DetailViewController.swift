@@ -15,9 +15,9 @@ class DetailViewController: HowlAtTheMoonViewController {
     let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
 
     let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let newCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let alignedFlowLayout = UICollectionViewFlowLayout()
+        alignedFlowLayout.scrollDirection = .horizontal
+        let newCollectionView = UICollectionView(frame: .zero, collectionViewLayout: alignedFlowLayout)
         newCollectionView.usesAutoLayout = true
         newCollectionView.backgroundColor = .clear
         newCollectionView.isScrollEnabled = true
@@ -86,8 +86,8 @@ class DetailViewController: HowlAtTheMoonViewController {
             
             $0.snp.makeConstraints {
                 $0.top.equalTo(view.safeAreaLayoutGuide).offset(225)
-                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(150)
-                $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-150)
+                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(155)
+                $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-145)
                 $0.bottom.equalTo(view)
             }
         }
@@ -98,6 +98,7 @@ class DetailViewController: HowlAtTheMoonViewController {
                 self.collectionView.setContentOffset(CGPoint(x: self.collectionView.contentOffset.x - self.collectionView.bounds.width, y: self.collectionView.contentOffset.y), animated: true)
             }
 
+            $0.usesAutoLayout = true
             view.addSubview($0)
 
             $0.snp.makeConstraints {
@@ -113,6 +114,7 @@ class DetailViewController: HowlAtTheMoonViewController {
                 self.collectionView.setContentOffset(CGPoint(x: self.collectionView.contentOffset.x + self.collectionView.bounds.width, y: self.collectionView.contentOffset.y), animated: true)
             }
 
+            $0.usesAutoLayout = true
             view.addSubview($0)
 
             $0.snp.makeConstraints {
@@ -131,7 +133,8 @@ class DetailViewController: HowlAtTheMoonViewController {
                     backgroundViewController.present(shopViewcontroller, animated: false)
                 }
             }
-            
+
+            $0.usesAutoLayout = true
             view.addSubview($0)
             
             $0.snp.makeConstraints {
@@ -182,28 +185,29 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfItemsPerRow: CGFloat = 3.0
-        
-        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        let totalSpace = flowLayout.sectionInset.left
-            + flowLayout.sectionInset.right
-            + (flowLayout.minimumInteritemSpacing * numberOfItemsPerRow - 1)
-        let size = Int((collectionView.bounds.width - totalSpace) / numberOfItemsPerRow)
-        return CGSize(width: size, height: Int(collectionView.bounds.height))
+//        let numberOfItemsPerRow: CGFloat = 3.0
+//
+//        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+//        let totalSpace = flowLayout.sectionInset.left
+//            + flowLayout.sectionInset.right
+//            + (flowLayout.minimumInteritemSpacing * numberOfItemsPerRow - 1)
+//        let size = Int((collectionView.bounds.width - totalSpace) / numberOfItemsPerRow)
+        return CGSize(width: (collectionView.bounds.width / 3) - 10, height: collectionView.bounds.height)
+//        return CGSize(width: size, height: Int(collectionView.bounds.height))
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        let totalCellWidth = 80 * collectionView.numberOfItems(inSection: 0)
-        let totalSpacingWidth = 10 * (collectionView.numberOfItems(inSection: 0) - 1)
-        
-        let leftInset = (collectionView.layer.frame.size.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
-        let rightInset = leftInset
-        
-        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
-        
-    }
-    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//
+//        let totalCellWidth = 80 * collectionView.numberOfItems(inSection: 0)
+//        let totalSpacingWidth = 10 * (collectionView.numberOfItems(inSection: 0) - 1)
+//
+//        let leftInset = (collectionView.layer.frame.size.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+//        let rightInset = leftInset
+//
+//        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+//
+//    }
+
 }
 
 class ImageViewCell: UICollectionViewCell {
@@ -214,7 +218,7 @@ class ImageViewCell: UICollectionViewCell {
     
     var image: UIImage? {
         didSet {
-            imageView.image = image?.aspectFitImage(inRect: self.bounds)
+            imageView.image = image
         }
     }
     
@@ -239,6 +243,7 @@ class ImageViewCell: UICollectionViewCell {
             label.textColor = UIColor.white
             label.lineBreakMode = .byWordWrapping
             label.numberOfLines = 0
+            label.usesAutoLayout = true
             titleOverlay.addSubview(label)
             
             label.snp.makeConstraints {
@@ -252,38 +257,46 @@ class ImageViewCell: UICollectionViewCell {
         
         with(imageView) {
             
-            $0.contentMode = .scaleToFill
-            
+            $0.contentMode = .scaleAspectFit
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {
                 $0.top.equalTo(self)
+                $0.width.equalTo(self)
+                $0.height.equalTo(imageView.snp.width).multipliedBy(1.46060606)
+                $0.centerX.equalTo(self)
             }
         }
         
         with(titleOverlay) {
             $0.contentMode = .scaleAspectFit
             $0.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.6)
-            
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {
                 $0.top.equalTo(self)
                 $0.height.equalTo(75)
                 $0.width.equalTo(self)
+                $0.centerX.equalTo(self)
             }
         }
         
         with(bottomOverlay) {
             $0.contentMode = .scaleAspectFit
             $0.backgroundColor = UIColor.init(red: 0.294, green: 0.651, blue: 0.624, alpha: 0.6)
-            
+
+            $0.usesAutoLayout = true
             addSubview($0)
             
             $0.snp.makeConstraints {
                 $0.bottom.equalTo(imageView)
                 $0.height.equalTo(50)
                 $0.width.equalTo(self)
+                $0.centerX.equalTo(self)
             }
             
             let label = UILabel()
@@ -291,6 +304,7 @@ class ImageViewCell: UICollectionViewCell {
             label.font = Font.systemFont(ofSize: 24)
             label.textAlignment = .center
             label.textColor = UIColor.white
+            label.usesAutoLayout = true
             bottomOverlay.addSubview(label)
             
             label.snp.makeConstraints {
