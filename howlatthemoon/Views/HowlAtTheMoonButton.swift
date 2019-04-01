@@ -40,7 +40,7 @@ class HowlAtTheMoonButton: UIButton {
         setTitle(text.uppercased(), for: .normal)
         setTitleColor(.white, for: .normal)
         backgroundColor = UIColor(red: 0, green: 0.6, blue: 0.6, alpha: 1.0) // aqua background for button
-        contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32) // set margins around text in button
+        contentEdgeInsets = UIEdgeInsets(top: 16, left: size, bottom: 16, right: size) // set margins around text in button
     }
 
     required init?(coder aDecoder: NSCoder) {

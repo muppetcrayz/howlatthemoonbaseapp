@@ -13,6 +13,7 @@ class DetailViewController: HowlAtTheMoonViewController {
     
     let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
     let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
+    let searchButton = HowlAtTheMoonButton(text: "Search", size: 16)
 
     let collectionView: UICollectionView = {
         let alignedFlowLayout = UICollectionViewFlowLayout()
@@ -47,33 +48,49 @@ class DetailViewController: HowlAtTheMoonViewController {
         
         with(checkoutButton) {
             $0.text = "Checkout & Complete Playlist"
-            
+
             $0.usesAutoLayout = true
             view.addSubview($0)
-            
+
             $0.addAction(for: .touchUpInside) {
                 let cartViewController = CartViewController()
-                
+
                 self.fadeAwayAndDismiss()
                     .done {
                         backgroundViewController.present(cartViewController, animated: false)
                 }
             }
-            
+
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(-50)
+                $0.trailing.equalTo(-175)
                 $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
             }
         }
-        
+
         with(yourPlaylistButton) {
             $0.text = "Your Playlist: " + playlist.count.description
-            
+
             $0.usesAutoLayout = true
             view.addSubview($0)
-            
+
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-75)
+                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-50)
+                $0.centerY.equalTo(checkoutButton)
+            }
+        }
+
+        with(searchButton) {
+            $0.text = "🔍"
+
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+
+            $0.addAction(for: .touchUpInside) {
+
+            }
+
+            $0.snp.makeConstraints {
+                $0.trailing.equalTo(checkoutButton.snp.trailing).offset(140)
                 $0.centerY.equalTo(checkoutButton)
             }
         }
