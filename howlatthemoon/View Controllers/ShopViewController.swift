@@ -11,7 +11,7 @@ import PromiseKit
 
 var detailCategory = SongCategory()
 
-class ShopViewController: HowlAtTheMoonViewController {
+class ShopViewController: HowlAtTheMoonViewController, UITextFieldDelegate {
 
     let store = DataStore.sharedInstance
     
@@ -59,6 +59,18 @@ class ShopViewController: HowlAtTheMoonViewController {
                     $0.leftViewMode = .always
 
                     $0.returnKeyType = .search
+                    
+                    $0.addAction(for: .primaryActionTriggered) {
+                        self.searchBar.resignFirstResponder()
+                        searchTerm = self.searchBar.text!
+                        print(searchTerm)
+                        let detailViewController = DetailViewController()
+                        
+                        self.fadeAwayAndDismiss()
+                        .done {
+                            backgroundViewController.present(detailViewController, animated: false)
+                        }
+                    }
 
                     self.view.addSubview($0)
                     $0.snp.makeConstraints {
@@ -80,6 +92,9 @@ class ShopViewController: HowlAtTheMoonViewController {
 
                 UIView.animate(.promise, duration: 0.33) {
                     self.searchBar.superview?.layoutIfNeeded()
+                }
+                .done { _ in
+                    self.searchBar.becomeFirstResponder()
                 }
             }
 

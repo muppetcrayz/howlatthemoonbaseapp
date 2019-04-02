@@ -9,11 +9,12 @@
 import UIKit
 import SwiftRichString
 
-class DetailViewController: HowlAtTheMoonViewController {
+class DetailViewController: HowlAtTheMoonViewController, UITextFieldDelegate {
     
     let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
     let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
     let searchButton = HowlAtTheMoonButton(text: "Search", size: 16)
+    let searchBar = UITextField()
 
     let collectionView: UICollectionView = {
         let alignedFlowLayout = UICollectionViewFlowLayout()
@@ -40,57 +41,110 @@ class DetailViewController: HowlAtTheMoonViewController {
         super.viewDidLoad()
         
         store.songs = []
-        store.getSongs(url: API.Songs.songURL(category: detailCategory.id)) {
-            DispatchQueue.main.async {
-                self.collectionView.reloadSections(IndexSet(integer: 0))
+        if (searchTerm != "") {
+            store.getSongs(url: API.Songs.songURL(searchTerm: searchTerm)) {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
+                }
+            }
+            searchTerm = ""
+        }
+        else {
+            store.getSongs(url: API.Songs.songURL(category: detailCategory.id)) {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
+                }
+            }
+        }
+        
+        with(searchButton) {
+            $0.text = "🔍"
+            
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+            
+            $0.addAction(for: .touchUpInside) {
+                with(self.searchBar) {
+                    $0.backgroundColor = .white
+                    
+                    let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                    $0.leftView = paddingView
+                    $0.leftViewMode = .always
+                    
+                    $0.returnKeyType = .search
+                    
+                    $0.addAction(for: .primaryActionTriggered) {
+                        self.searchBar.resignFirstResponder()
+                        searchTerm = self.searchBar.text!
+                        self.store.getSongs(url: API.Songs.songURL(searchTerm: searchTerm)) {
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadSections(IndexSet(integer: 0))
+                            }
+                        }
+                        searchTerm = ""
+                    }
+                    
+                    self.view.addSubview($0)
+                    $0.snp.makeConstraints {
+                        $0.leading.equalTo(self.searchButton)
+                        $0.trailing.equalTo(self.searchButton)
+                        $0.height.equalTo(self.searchButton)
+                        $0.centerY.equalTo(self.checkoutButton)
+                    }
+                    self.view?.setNeedsLayout()
+                    self.view?.layoutIfNeeded()
+                }
+                
+                self.searchBar.snp.remakeConstraints {
+                    $0.leading.equalTo(self.yourPlaylistButton)
+                    $0.trailing.equalTo(self.searchButton)
+                    $0.height.equalTo(self.searchButton)
+                    $0.centerY.equalTo(self.checkoutButton)
+                }
+                
+                UIView.animate(.promise, duration: 0.33) {
+                    self.searchBar.superview?.layoutIfNeeded()
+                    }
+                    .done { _ in
+                        self.searchBar.becomeFirstResponder()
+                }
+            }
+            
+            $0.snp.makeConstraints {
+                $0.trailing.equalToSuperview().offset(-50)
+                $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
             }
         }
         
         with(checkoutButton) {
             $0.text = "Checkout & Complete Playlist"
-
+            
             $0.usesAutoLayout = true
             view.addSubview($0)
-
+            
             $0.addAction(for: .touchUpInside) {
                 let cartViewController = CartViewController()
-
+                
                 self.fadeAwayAndDismiss()
                     .done {
                         backgroundViewController.present(cartViewController, animated: false)
                 }
             }
-
+            
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(-175)
-                $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
+                $0.trailing.equalTo(searchButton.snp.leading).offset(-25)
+                $0.centerY.equalTo(searchButton)
             }
         }
-
+        
         with(yourPlaylistButton) {
             $0.text = "Your Playlist: " + playlist.count.description
-
+            
             $0.usesAutoLayout = true
             view.addSubview($0)
-
+            
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-50)
-                $0.centerY.equalTo(checkoutButton)
-            }
-        }
-
-        with(searchButton) {
-            $0.text = "🔍"
-
-            $0.usesAutoLayout = true
-            view.addSubview($0)
-
-            $0.addAction(for: .touchUpInside) {
-
-            }
-
-            $0.snp.makeConstraints {
-                $0.trailing.equalTo(checkoutButton.snp.trailing).offset(140)
+                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-25)
                 $0.centerY.equalTo(checkoutButton)
             }
         }
@@ -224,7 +278,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
 //        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
 //
 //    }
-
 }
 
 class ImageViewCell: UICollectionViewCell {

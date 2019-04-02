@@ -11,6 +11,7 @@ import SquareReaderSDK
 
 let backgroundViewController = BackgroundViewController()
 var playlist : [(Song, Int)] = []
+var searchTerm = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

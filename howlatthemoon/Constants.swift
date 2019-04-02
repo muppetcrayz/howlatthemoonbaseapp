@@ -38,6 +38,10 @@ enum API {
         static func songURL(category: Int) -> String {
             return "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100&category=" + category.description
         }
+        
+        static func songURL(searchTerm: String) -> String {
+            return "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100&search=" + searchTerm
+        }
     }
     
     enum Transactions {
