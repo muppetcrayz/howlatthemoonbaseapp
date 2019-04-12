@@ -298,17 +298,16 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         _ checkoutController: SQRDCheckoutController,
         didFinishCheckoutWith result: SQRDCheckoutResult) {
         // result contains details about the completed checkout
-//        if (result.transactionID != nil) {
-            print(result)
-//            sendToWooCommerce()
-//        playlist.removeAll()
-//        let welcomeViewController = WelcomeViewController()
-//
-//        self.fadeAwayAndDismiss()
-//            .done {
-//                backgroundViewController.present(WelcomeViewController, animated: false)
-//        }
-//        }
+        if (result.transactionID != nil) {
+            sendToWooCommerce()
+            playlist.removeAll()
+            let welcomeViewController = WelcomeViewController()
+            
+            self.fadeAwayAndDismiss()
+                .done {
+                    backgroundViewController.present(welcomeViewController, animated: false)
+            }
+        }
     }
     
     func checkoutControllerDidCancel(

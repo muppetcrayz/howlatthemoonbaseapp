@@ -242,14 +242,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         playlist.append((store.songs[indexPath.row], 1))
         with(yourPlaylistButton) {
             $0.text = "Your Playlist: " + playlist.count.description
-            
-            $0.usesAutoLayout = true
-            view.addSubview($0)
-            
-            $0.snp.makeConstraints {
-                $0.trailing.equalTo(checkoutButton.snp.leading).offset(-75)
-                $0.centerY.equalTo(checkoutButton)
-            }
         }
     }
     

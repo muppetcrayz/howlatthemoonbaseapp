@@ -17,6 +17,10 @@ extension Double {
     static let standardiOSAnimationDuration: Double = 0.33
 }
 
+enum Square {
+    static let authorize = "https://connect.squareup.com/mobile/authorization-code"
+}
+
 enum API {
     static let baseURL = "https://requestatthemoon.com"
     static let consumerKey = "ck_89cd5194afe9c715c2ad8583170f8d9d9ab8f2c1"
@@ -42,12 +46,6 @@ enum API {
         static func songURL(searchTerm: String) -> String {
             return "\(baseURL)?\(urlParameterStringFor(consumerKey: consumerKey, consumerSecret: consumerSecret))&per_page=100&search=" + searchTerm
         }
-    }
-    
-    enum Transactions {
-        // TODO: put location
-        static let baseURL = "https://connect.squareup.com/v2/locations/CBASEPjYieIID0t4z7mgJmJI--kgAQ/transactions"
-        
     }
     
     enum Orders {

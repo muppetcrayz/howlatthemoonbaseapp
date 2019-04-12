@@ -54,26 +54,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func retrieveAuthorizationCode() -> String {
-        // TODO: Add code to retrieve a mobile authorization code.
-        return "sq0acp-ath1DL4penE3FnzSQWrhVYiTQDabl2dG_FKkuQLp1tY"
+    func retrieveAuthorizationCode(completion: @escaping(String) -> Void) {
+        
+        let authenticateString = Square.authorize
+        
+        var request = URLRequest(url: URL(string: authenticateString)!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer EAAAECqkFzwAJ8LbjD6t5YpUm0YTyaiqo3xEnia2crpOOHZkKB3NgGTHJpXKisPG", forHTTPHeaderField: "Authorization")
+        request.httpBody = "{\"location_id\":\"1V23QVGQHVS8P\"}".data(using: .utf8)
+        
+        // Create and run a URLSession data task with our JSON encoded POST request
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard let unwrappedData = data else { print("Error unwrapping data"); return }
+            
+            do {
+                let responseJSON = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as! CategoryJSON
+                completion(responseJSON["authorization_code"] as! String)
+            }
+            catch {
+                completion("")
+            }
+        }
+        task.resume()
     }
     
     func authorizeReaderSDKIfNeeded() {
-        
         if SQRDReaderSDK.shared.isAuthorized {
             print("Already authorized.")
         }
         else {
-            let authCode = retrieveAuthorizationCode()
-            SQRDReaderSDK.shared.authorize(withCode: authCode) { location, error in
-                
-                if let authError = error {
-                    // Handle the error
-                    print(authError)
-                }
-                else {
-                    print("Authorized!")
+            self.retrieveAuthorizationCode { authCode in
+                DispatchQueue.main.async {
+                    SQRDReaderSDK.shared.authorize(withCode: authCode) { location, error in
+                        if let authError = error {
+                            // Handle the error
+                            print(authError)
+                        }
+                        else {
+                            print("Authorized!")
+                        }
+                    }
                 }
             }
         }
