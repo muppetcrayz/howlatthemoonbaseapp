@@ -15,7 +15,7 @@ import CoreLocation
 
 var total = 0.0
 
-class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDelegate, SQRDReaderSettingsControllerDelegate {
+class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDelegate {
     let cellId = "cellId"
 
     let logoInvisibleButton = UIButton(type: .custom)
@@ -26,6 +26,7 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
     let proceedToCheckoutButton = HowlAtTheMoonButton(text: "Proceed to Checkout →", size: 16)
     let backButton = HowlAtTheMoonButton(text: "Continue Browsing", size: 16)
     let label = UILabel()
+    let settingsButton = HowlAtTheMoonButton(text: "Reader Settings", size: 16)
     private lazy var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -33,7 +34,6 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         
         requestLocationPermission()
         requestMicrophonePermission()
-        pairCardReaders()
         
         for _ in playlist {
             let x = removeDuplicates()
@@ -169,6 +169,22 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
             }
         }
         
+        with(settingsButton) {
+            $0.usesAutoLayout = true
+            view.addSubview($0)
+
+            $0.addAction(for: .touchUpInside) {
+                let readerSettingsController = SQRDReaderSettingsController(delegate: self)
+                readerSettingsController.present(from: self)
+            }
+
+            $0.snp.makeConstraints {
+                $0.bottom.equalTo(totalView).offset(75)
+                $0.width.equalTo(150)
+                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(100)
+            }
+        }
+        
         with(backButton) {
             $0.usesAutoLayout = true
             view.addSubview($0)
@@ -184,8 +200,8 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
             
             $0.snp.makeConstraints {
                 $0.bottom.equalTo(totalView).offset(75)
-                $0.width.equalTo(300)
-                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(175)
+                $0.width.equalTo(200)
+                $0.leading.equalTo(view.safeAreaLayoutGuide).offset(375)
             }
         }
     }
@@ -335,26 +351,7 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         }
     }
     
-    func pairCardReaders() {
-        let readerSettingsController = SQRDReaderSettingsController(
-            delegate: self
-        )
-        readerSettingsController.present(from: self)
-    }
-    
     // MARK: - SQRDReaderSettingsControllerDelegate
-    
-    func readerSettingsControllerDidPresent(
-        _ readerSettingsController: SQRDReaderSettingsController) {
-        print("Reader settings flow presented.")
-    }
-    
-    func readerSettingsController(
-        _ readerSettingsController: SQRDReaderSettingsController,
-        didFailToPresentWith error: Error) {
-        // Handle the error - this example prints the error to the console
-        print(error)
-    }
     
 }
 
@@ -394,4 +391,30 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
         return 80
     }
 
+}
+
+extension CartViewController: SQRDReaderSettingsControllerDelegate {
+    func readerSettingsControllerDidPresent(_ readerSettingsController: SQRDReaderSettingsController) {
+        print("The Reader Settings controller did present.")
+    }
+    
+    func readerSettingsController(_ readerSettingsController: SQRDReaderSettingsController, didFailToPresentWith error: Error) {
+        /**************************************************************************************************
+         * The Reader Settings controller failed due to an error.
+         *
+         * Errors from Square Reader SDK always have a `localizedDescription` that is appropriate for displaying to users.
+         * Use the values of `userInfo[SQRDErrorDebugCodeKey]` and `userInfo[SQRDErrorDebugMessageKey]` (which are always
+         * set for Reader SDK errors) for more information about the underlying issue and how to recover from it in your app.
+         **************************************************************************************************/
+        
+        guard let readerSettingsError = error as? SQRDReaderSettingsControllerError,
+            let debugCode = readerSettingsError.userInfo[SQRDErrorDebugCodeKey] as? String,
+            let debugMessage = readerSettingsError.userInfo[SQRDErrorDebugMessageKey] as? String else {
+                return
+        }
+        
+        print(debugCode)
+        print(debugMessage)
+        fatalError(error.localizedDescription)
+    }
 }

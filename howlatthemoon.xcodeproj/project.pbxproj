@@ -18,15 +18,9 @@
 		08BB8533222324CE000E918A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BB8532222324CE000E918A /* Assets.xcassets */; };
 		08BB8536222324CE000E918A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08BB8534222324CE000E918A /* LaunchScreen.storyboard */; };
 		08BB8541222324CE000E918A /* howlatthemoonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB8540222324CE000E918A /* howlatthemoonTests.swift */; };
-		08C7A9422260CFA700E559E2 /* SquareReaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9412260CFA600E559E2 /* SquareReaderSDK.framework */; };
-		08C7A9432260CFA700E559E2 /* SquareReaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9412260CFA600E559E2 /* SquareReaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08C7A9472260D1E300E559E2 /* CorePaymentCard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9442260D1E200E559E2 /* CorePaymentCard.framework */; };
-		08C7A9482260D1E300E559E2 /* CorePaymentCard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9442260D1E200E559E2 /* CorePaymentCard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08C7A9492260D1E300E559E2 /* SquareCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9452260D1E200E559E2 /* SquareCore.framework */; };
-		08C7A94A2260D1E300E559E2 /* SquareCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9452260D1E200E559E2 /* SquareCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08C7A94B2260D1E300E559E2 /* SquareReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9462260D1E300E559E2 /* SquareReader.framework */; };
-		08C7A94C2260D1E300E559E2 /* SquareReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08C7A9462260D1E300E559E2 /* SquareReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		08CC45DA2224CEF200484D37 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC45D82224CEF200484D37 /* BackgroundViewController.swift */; };
+		08D51E3D2260DAF20095AD78 /* SquareReaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D51E3C2260DAF20095AD78 /* SquareReaderSDK.framework */; };
+		08D51E3E2260DAF20095AD78 /* SquareReaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08D51E3C2260DAF20095AD78 /* SquareReaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11CA9E73E3F041E6F828F18B /* Pods_howlatthemoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */; };
 		371107A1222C71B200BADABF /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371107A0222C71B200BADABF /* ShopViewController.swift */; };
 		371107A5222C79D600BADABF /* HowlAtTheMoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */; };
@@ -63,16 +57,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		086DA1A4225FF306009BDE5A /* Embed Frameworks */ = {
+		08C7A94F2260DA7000E559E2 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				08C7A9482260D1E300E559E2 /* CorePaymentCard.framework in Embed Frameworks */,
-				08C7A9432260CFA700E559E2 /* SquareReaderSDK.framework in Embed Frameworks */,
-				08C7A94C2260D1E300E559E2 /* SquareReader.framework in Embed Frameworks */,
-				08C7A94A2260D1E300E559E2 /* SquareCore.framework in Embed Frameworks */,
+				08D51E3E2260DAF20095AD78 /* SquareReaderSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,11 +86,8 @@
 		08BB853C222324CE000E918A /* howlatthemoonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = howlatthemoonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BB8540222324CE000E918A /* howlatthemoonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = howlatthemoonTests.swift; sourceTree = "<group>"; };
 		08BB8542222324CE000E918A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08C7A9412260CFA600E559E2 /* SquareReaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SquareReaderSDK.framework; sourceTree = "<group>"; };
-		08C7A9442260D1E200E559E2 /* CorePaymentCard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CorePaymentCard.framework; path = SquareReaderSDK.framework/Frameworks/CorePaymentCard.framework; sourceTree = "<group>"; };
-		08C7A9452260D1E200E559E2 /* SquareCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SquareCore.framework; path = SquareReaderSDK.framework/Frameworks/SquareCore.framework; sourceTree = "<group>"; };
-		08C7A9462260D1E300E559E2 /* SquareReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SquareReader.framework; path = SquareReaderSDK.framework/Frameworks/SquareReader.framework; sourceTree = "<group>"; };
 		08CC45D82224CEF200484D37 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
+		08D51E3C2260DAF20095AD78 /* SquareReaderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SquareReaderSDK.framework; sourceTree = "<group>"; };
 		117F35797A9826CD71CED026 /* Pods-howlatthemoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-howlatthemoon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-howlatthemoon/Pods-howlatthemoon.debug.xcconfig"; sourceTree = "<group>"; };
 		1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_howlatthemoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		371107A0222C71B200BADABF /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -133,10 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11CA9E73E3F041E6F828F18B /* Pods_howlatthemoon.framework in Frameworks */,
-				08C7A9472260D1E300E559E2 /* CorePaymentCard.framework in Frameworks */,
-				08C7A94B2260D1E300E559E2 /* SquareReader.framework in Frameworks */,
-				08C7A9492260D1E300E559E2 /* SquareCore.framework in Frameworks */,
-				08C7A9422260CFA700E559E2 /* SquareReaderSDK.framework in Frameworks */,
+				08D51E3D2260DAF20095AD78 /* SquareReaderSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,10 +138,6 @@
 		08BB851F222324CC000E918A = {
 			isa = PBXGroup;
 			children = (
-				08C7A9442260D1E200E559E2 /* CorePaymentCard.framework */,
-				08C7A9452260D1E200E559E2 /* SquareCore.framework */,
-				08C7A9462260D1E300E559E2 /* SquareReader.framework */,
-				08C7A9412260CFA600E559E2 /* SquareReaderSDK.framework */,
 				08BB852A222324CC000E918A /* howlatthemoon */,
 				08BB853F222324CE000E918A /* howlatthemoonTests */,
 				08BB8529222324CC000E918A /* Products */,
@@ -251,6 +232,7 @@
 		A82959057EF5F28CECF7A884 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08D51E3C2260DAF20095AD78 /* SquareReaderSDK.framework */,
 				1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */,
 			);
 			name = Frameworks;
@@ -276,9 +258,9 @@
 				08BB8524222324CC000E918A /* Sources */,
 				08BB8525222324CC000E918A /* Frameworks */,
 				08BB8526222324CC000E918A /* Resources */,
+				08C7A94F2260DA7000E559E2 /* Embed Frameworks */,
 				5A82BE1C897FDE95F66E4187 /* [CP] Embed Pods Frameworks */,
 				08CA9B7C22514CFA0074135B /* ShellScript */,
-				086DA1A4225FF306009BDE5A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -395,7 +377,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/SquareReaderSDK.framework/setup\"\n";
+			shellScript = "FRAMEWORKS=\"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\n\"${FRAMEWORKS}/SquareReaderSDK.framework/setup\"\n";
 		};
 		4D7618CF5EC02E340F6FB093 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
