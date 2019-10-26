@@ -35,13 +35,6 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         requestLocationPermission()
         requestMicrophonePermission()
         
-        for _ in playlist {
-            let x = removeDuplicates()
-            if (x != -1) {
-                playlist.remove(at: x)
-            }
-        }
-        
         calculateTotal()
 
         with(logoInvisibleButton) {
@@ -206,22 +199,10 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         }
     }
     
-    func removeDuplicates() -> Int {
-        for i in (0..<playlist.count) {
-            for x in (i+1..<playlist.count) {
-                if playlist[i].0.id == playlist[x].0.id {
-                    playlist[i].1 += playlist[x].1
-                    return x
-                }
-            }
-        }
-        return -1
-    }
-    
     func calculateTotal() -> Void {
         total = 0.0
         for song in playlist {
-            total += Double(song.1 * 5)
+            total += 5
         }
         
         let formatter = NumberFormatter()
@@ -246,7 +227,7 @@ class CartViewController: HowlAtTheMoonViewController, SQRDCheckoutControllerDel
         
         for item in playlist {
             var line_item: JSON = []
-            line_item = ["product_id": item.0.id, "quantity": item.1]
+            line_item = ["product_id": item.id, "quantity": 1]
             lineitems.append(line_item)
         }
         
@@ -363,19 +344,13 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CartItemTableViewCell
 
-        let song = playlist[indexPath.row].0
+        let song = playlist[indexPath.row]
         cell.albumArtImage = song.getSongPicture()
         cell.productName = song.name
-        cell.price = 5
-        cell.quantity = playlist[indexPath.row].1
-        cell.total = playlist[indexPath.row].1 * 5
+        cell.total = 5
         cell.deleteTapHandler = {
             playlist.remove(at: indexPath.row)
             tableView.reloadData()
-            self.calculateTotal()
-        }
-        cell.didChangeStepperHandler = {
-            playlist[indexPath.row].1 = Int(cell.quantityStepper.value)
             self.calculateTotal()
         }
 

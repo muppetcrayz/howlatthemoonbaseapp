@@ -10,8 +10,6 @@ import UIKit
 
 class CartHeaderView: UITableViewHeaderFooterView {
     let productLabel = UILabel()
-    let priceLabel = UILabel()
-    let quantityLabel = UILabel()
     let totalLabel = UILabel()
 
     override init(reuseIdentifier: String?) {
@@ -32,34 +30,6 @@ class CartHeaderView: UITableViewHeaderFooterView {
             $0.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
         
-        with(priceLabel) {
-            $0.text = "Price"
-
-            $0.usesAutoLayout = true
-            addSubview($0)
-            
-            $0.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(CGFloat.standardiOSSpacing)
-                $0.leading.equalTo(productLabel.snp.trailing).offset(CGFloat.standardiOSSpacing * 4)
-                $0.width.equalToSuperview().multipliedBy(0.1)
-            }
-            
-            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
-        }
-        
-        with(quantityLabel) {
-            $0.text = "Quantity"
-
-            $0.usesAutoLayout = true
-            addSubview($0)
-            
-            $0.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(CGFloat.standardiOSSpacing)
-                $0.leading.equalTo(priceLabel.snp.trailing).offset(CGFloat.standardiOSSpacing * 2)
-            }
-            
-            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
-        }
         
         with(totalLabel) {
             $0.text = "Total"
@@ -69,7 +39,6 @@ class CartHeaderView: UITableViewHeaderFooterView {
             
             $0.snp.makeConstraints {
                 $0.top.equalToSuperview().offset(CGFloat.standardiOSSpacing)
-                $0.leading.equalTo(quantityLabel.snp.trailing).offset(CGFloat.standardiOSSpacing * 2)
                 $0.trailing.equalToSuperview().offset(-CGFloat.standardiOSSpacing)
             }
             

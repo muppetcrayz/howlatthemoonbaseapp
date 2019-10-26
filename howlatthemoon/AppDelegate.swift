@@ -10,7 +10,7 @@ import UIKit
 import SquareReaderSDK
 
 let backgroundViewController = BackgroundViewController()
-var playlist : [(Song, Int)] = []
+var playlist : [Song] = []
 var searchTerm = ""
 
 @UIApplicationMain

@@ -9,12 +9,16 @@ PODS:
   - PromiseKit/UIKit (6.8.3):
     - PromiseKit/CorePromise
   - SnapKit (4.2.0)
+  - SwiftMessages (7.0.0):
+    - SwiftMessages/App (= 7.0.0)
+  - SwiftMessages/App (7.0.0)
   - SwiftRichString (3.0.0)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - PromiseKit
   - SnapKit
+  - SwiftMessages
   - SwiftRichString
   - SwiftyJSON
 
@@ -22,15 +26,17 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - PromiseKit
     - SnapKit
+    - SwiftMessages
     - SwiftRichString
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftMessages: a952f7a9103d9aeab93730a2861d2d8fcdd8758f
   SwiftRichString: 5cb4860df3dc8e4d9087d7b948b210177342c3da
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 11c7818d79afbc67f9a95815c7fee145c6c217bb
+PODFILE CHECKSUM: 0ca4d222f3eaa04318b52df6176537a2db7c235e
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.1

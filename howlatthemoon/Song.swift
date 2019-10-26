@@ -50,3 +50,15 @@ class Song {
         return pic!
     }
 }
+
+extension Song: Equatable {
+    static func == (lhs: Song, rhs: Song) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension Song: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

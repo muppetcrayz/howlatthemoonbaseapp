@@ -5,4 +5,5 @@ target 'howlatthemoon' do
   pod 'PromiseKit'
   pod 'SwiftyJSON'
   pod 'SwiftRichString'
+  pod 'SwiftMessages'
 end

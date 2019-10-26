@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftMessages
 
 extension UIView {
     var usesAutoLayout: Bool {
@@ -53,6 +54,18 @@ extension String {
 
         return decoded ?? self
     }
+    
+    var htmlStripped: String {
+        do {
+            guard let data = self.data(using: .unicode) else {
+                return self
+            }
+            let attributed = try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            return attributed.string
+        } catch {
+            return self
+        }
+    }
 }
 
 extension UIImage {
@@ -70,5 +83,37 @@ extension UIImage {
         }
 
         return UIGraphicsGetImageFromCurrentImageContext()
+    }
+}
+
+extension MessageView {
+    static func success(title: String, body: String) -> MessageView {
+        with(MessageView.viewFromNib(layout: .cardView)) {
+            $0.configureTheme(.success)
+
+            $0.applyStyling()
+
+            $0.configureContent(title: "\(title) Successful", body: body, iconText: "✓")
+        }
+    }
+
+    static func error(_ title: String, body: String) -> MessageView {
+        with(MessageView.viewFromNib(layout: .cardView)) {
+            $0.configureTheme(.error)
+
+            $0.applyStyling()
+
+            $0.configureContent(title: "\(title) Error", body: body, iconText: "!")
+        }
+    }
+
+    final func applyStyling() {
+        configureDropShadow()
+
+        layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+
+        button?.isHidden = true
+        
+        (backgroundView as? CornerRoundingView)?.cornerRadius = 10
     }
 }

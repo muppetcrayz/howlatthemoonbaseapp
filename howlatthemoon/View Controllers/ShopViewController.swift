@@ -19,8 +19,6 @@ class ShopViewController: HowlAtTheMoonViewController, UITextFieldDelegate {
 
     let yourPlaylistButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
     let checkoutButton = HowlAtTheMoonButton(text: "Your Playlist", size: 16)
-    let searchButton = HowlAtTheMoonButton(text: "Search", size: 16)
-    let searchBar = UITextField()
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,66 +41,6 @@ class ShopViewController: HowlAtTheMoonViewController, UITextFieldDelegate {
 //                self.spinner.stopAnimating()
             }
         }
-
-        with(searchButton) {
-            $0.text = "🔍"
-
-            $0.usesAutoLayout = true
-            view.addSubview($0)
-
-            $0.addAction(for: .touchUpInside) {
-                with(self.searchBar) {
-                    $0.backgroundColor = .white
-
-                    let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-                    $0.leftView = paddingView
-                    $0.leftViewMode = .always
-
-                    $0.returnKeyType = .search
-                    
-                    $0.addAction(for: .primaryActionTriggered) {
-                        self.searchBar.resignFirstResponder()
-                        searchTerm = self.searchBar.text!
-                        print(searchTerm)
-                        let detailViewController = DetailViewController()
-                        
-                        self.fadeAwayAndDismiss()
-                        .done {
-                            backgroundViewController.present(detailViewController, animated: false)
-                        }
-                    }
-
-                    self.view.addSubview($0)
-                    $0.snp.makeConstraints {
-                        $0.leading.equalTo(self.searchButton)
-                        $0.trailing.equalTo(self.searchButton)
-                        $0.height.equalTo(self.searchButton)
-                        $0.centerY.equalTo(self.checkoutButton)
-                    }
-                    self.view?.setNeedsLayout()
-                    self.view?.layoutIfNeeded()
-                }
-
-                self.searchBar.snp.remakeConstraints {
-                    $0.leading.equalTo(self.yourPlaylistButton)
-                    $0.trailing.equalTo(self.searchButton)
-                    $0.height.equalTo(self.searchButton)
-                    $0.centerY.equalTo(self.checkoutButton)
-                }
-
-                UIView.animate(.promise, duration: 0.33) {
-                    self.searchBar.superview?.layoutIfNeeded()
-                }
-                .done { _ in
-                    self.searchBar.becomeFirstResponder()
-                }
-            }
-
-            $0.snp.makeConstraints {
-                $0.trailing.equalToSuperview().offset(-50)
-                $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
-            }
-        }
         
         with(checkoutButton) {
             $0.text = "Checkout & Complete Playlist"
@@ -120,8 +58,8 @@ class ShopViewController: HowlAtTheMoonViewController, UITextFieldDelegate {
             }
 
             $0.snp.makeConstraints {
-                $0.trailing.equalTo(searchButton.snp.leading).offset(-25)
-                $0.centerY.equalTo(searchButton)
+                $0.trailing.equalToSuperview().offset(-50)
+                $0.centerY.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
             }
         }
 
