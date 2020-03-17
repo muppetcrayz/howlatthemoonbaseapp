@@ -6,11 +6,11 @@
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		4xhLy5Tldl7+uk+KUqd8LEh25nw=
+		HfxS2gijpa81EgRk+SHN3wOYlM8=
 		</data>
 		<key>SquareCoreResources.bundle/Info.plist</key>
 		<data>
-		7XvDqCv/X5zCJvKFTSduGjFGBDY=
+		ndhB6ZKIU4FkxZr8FzURqP3mnPI=
 		</data>
 		<key>SquareCoreResources.bundle/SquareCoreResources-Info.plist</key>
 		<data>
@@ -32,11 +32,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7XvDqCv/X5zCJvKFTSduGjFGBDY=
+			ndhB6ZKIU4FkxZr8FzURqP3mnPI=
 			</data>
 			<key>hash2</key>
 			<data>
-			jl6NU3R9WVfYvMtbeG/wu/IqSJKI8JEtrEuscKqVj1g=
+			DzvNRnmZc7tE33ukscMmEe/Mue5QLmre0C4TqNEVQkc=
 			</data>
 		</dict>
 		<key>SquareCoreResources.bundle/SquareCoreResources-Info.plist</key>
@@ -66,7 +66,7 @@
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^</key>
+		<key>^.*</key>
 		<true/>
 		<key>^.*\.lproj/</key>
 		<dict>
@@ -97,24 +97,12 @@
 			<key>weight</key>
 			<real>11</real>
 		</dict>
-		<key>^</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>2000</real>
-		</dict>
-		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^.*</key>
 		<true/>
@@ -150,13 +138,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^[^/]+$</key>
-		<dict>
-			<key>nested</key>
-			<true/>
-			<key>weight</key>
-			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

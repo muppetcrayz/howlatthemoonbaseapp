@@ -17,6 +17,7 @@
 @import Foundation;
 
 @class SQRDCard;
+@class SQRDCardReceiptDetails;
 
 /**
  The entry method used to provide a card's details.
@@ -50,10 +51,15 @@ typedef NS_ENUM(NSInteger, SQRDTenderCardDetailsEntryMethod) {
 
 /**
  The method used to capture the card information during the checkout flow.
- 
+
  For example, whether the card was swiped or typed in manually.
  */
 @property (nonatomic, readonly) SQRDTenderCardDetailsEntryMethod entryMethod;
+
+/**
+ Details related to the card payment that can be used to produce EMV-compliant receipts.
+ */
+@property (nonatomic, readonly, nullable) SQRDCardReceiptDetails *cardReceiptDetails;
 
 #pragma mark - NSObject
 
@@ -67,7 +73,7 @@ typedef NS_ENUM(NSInteger, SQRDTenderCardDetailsEntryMethod) {
  :nodoc:
  Returns an integer that can be used as a table address in a hash table structure.
  */
-@property (readonly) NSUInteger hash;
+@property (nonatomic, readonly) NSUInteger hash;
 
 /** :nodoc: */
 - (nonnull instancetype)init NS_UNAVAILABLE;

@@ -43,6 +43,7 @@ typedef NS_OPTIONS(NSUInteger, SQRDAdditionalPaymentTypes) {
  - `skipReceipt`: `false`
  - `collectSignature`: `false`
  - `allowSplitTender`: `false`
+ - `delayCapture`: `false`
  */
 @interface SQRDCheckoutParameters : NSObject <NSCopying>
 
@@ -107,6 +108,21 @@ typedef NS_OPTIONS(NSUInteger, SQRDAdditionalPaymentTypes) {
  Defaults to `false`.
  */
 @property (nonatomic, assign) BOOL allowSplitTender;
+
+/**
+ When `true`, if checkout completes successfully, the SDK will only authorize,but not
+ capture any card payments. You can then use the Square Connect CaptureTransaction endpoint
+ to capture the card payments at a later time.
+ 
+ Setting `delayCapture` to `true` will skip the receipt, tipping, and signature
+ screens, and the following parameters will be ignored:
+ - `tipSettings`
+ - `skipReceipt`
+ - `collectSignature`
+ 
+ Defaults to `false`. By default, the SDK will immediately capture all card payments.
+ */
+@property (nonatomic, assign, readwrite) BOOL delayCapture;
 
 #pragma mark - Deprecated
 

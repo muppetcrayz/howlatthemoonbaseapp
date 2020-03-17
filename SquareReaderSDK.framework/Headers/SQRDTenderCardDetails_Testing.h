@@ -20,6 +20,7 @@
 @interface SQRDTenderCardDetails (Testing)
 
 - (nonnull instancetype)initWithCard:(nonnull SQRDCard *)card
+                      receiptDetails:(nullable SQRDCardReceiptDetails *)receiptDetails
                          entryMethod:(SQRDTenderCardDetailsEntryMethod)entryMethod;
 
 @end

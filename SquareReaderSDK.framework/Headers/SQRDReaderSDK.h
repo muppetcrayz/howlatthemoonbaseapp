@@ -81,7 +81,7 @@ SQRD_ERROR_ENUM(SQRDDeauthorizationErrorDomain, SQRDDeauthorizationError){
  The Reader SDK singleton.
  Use this to authorize and deauthorize Reader SDK to accept payments on behalf of a Square seller account.
  */
-@property (class, readonly, strong, nonnull) SQRDReaderSDK *sharedSDK;
+@property (nonatomic, class, readonly, strong, nonnull) SQRDReaderSDK *sharedSDK;
 
 /**
  Returns the location of the authorized Square seller account if Reader SDK is authorized; otherwise, `nil`.

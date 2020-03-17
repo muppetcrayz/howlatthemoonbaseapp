@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080C2FF5240C4D1000046A73 /* Pods_howlatthemoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */; };
+		080C2FF6240C4D1000046A73 /* Pods_howlatthemoon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		083A17D6222F4EBF00BB0D19 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A17D5222F4EBF00BB0D19 /* Song.swift */; };
 		083A17D8222F5E2100BB0D19 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A17D7222F5E2100BB0D19 /* CartViewController.swift */; };
 		08A0E628222CB08200463481 /* SongCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0E627222CB08200463481 /* SongCategory.swift */; };
@@ -21,7 +23,6 @@
 		08CC45DA2224CEF200484D37 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CC45D82224CEF200484D37 /* BackgroundViewController.swift */; };
 		08D51E3D2260DAF20095AD78 /* SquareReaderSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D51E3C2260DAF20095AD78 /* SquareReaderSDK.framework */; };
 		08D51E3E2260DAF20095AD78 /* SquareReaderSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08D51E3C2260DAF20095AD78 /* SquareReaderSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		11CA9E73E3F041E6F828F18B /* Pods_howlatthemoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A60157C2DAA8764B4617913 /* Pods_howlatthemoon.framework */; };
 		371107A1222C71B200BADABF /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371107A0222C71B200BADABF /* ShopViewController.swift */; };
 		371107A5222C79D600BADABF /* HowlAtTheMoonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371107A4222C79D600BADABF /* HowlAtTheMoonViewController.swift */; };
 		374B50F1222C949A00F301D9 /* HowlAtTheMoonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B50F0222C949A00F301D9 /* HowlAtTheMoonButton.swift */; };
@@ -63,6 +64,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				080C2FF6240C4D1000046A73 /* Pods_howlatthemoon.framework in Embed Frameworks */,
 				08D51E3E2260DAF20095AD78 /* SquareReaderSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -120,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11CA9E73E3F041E6F828F18B /* Pods_howlatthemoon.framework in Frameworks */,
+				080C2FF5240C4D1000046A73 /* Pods_howlatthemoon.framework in Frameworks */,
 				08D51E3D2260DAF20095AD78 /* SquareReaderSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,9 +303,11 @@
 				TargetAttributes = {
 					08BB8527222324CC000E918A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 					};
 					08BB853B222324CE000E918A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1130;
 						TestTargetID = 08BB8527222324CC000E918A;
 					};
 				};
@@ -612,7 +616,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sageconger.howlatthemoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -641,7 +645,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sageconger.howlatthemoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
@@ -661,7 +665,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sageconger.howlatthemoonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/howlatthemoon.app/howlatthemoon";
 			};
@@ -682,7 +686,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sageconger.howlatthemoonTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/howlatthemoon.app/howlatthemoon";
 			};

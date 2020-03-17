@@ -22,7 +22,9 @@ struct APIClient {
         
         let dataTask = session.dataTask(with: unwrappedURL) { (data, response, error) in
             
-            guard let unwrappedData = data else { print("Error unwrapping data"); return }
+            guard let unwrappedData = data else {
+                print("Error unwrapping data"); return
+            }
             
             do {
                 let responseJSON = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [CategoryJSON]
@@ -44,7 +46,9 @@ struct APIClient {
         
         let dataTask = session.dataTask(with: unwrappedURL) { (data, response, error) in
             
-            guard let unwrappedData = data else { print("Error unwrapping data"); return }
+            guard let unwrappedData = data else {
+                print("Error unwrapping data"); return
+            }
             
             do {
                 let responseJSON = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as? [CategoryJSON]

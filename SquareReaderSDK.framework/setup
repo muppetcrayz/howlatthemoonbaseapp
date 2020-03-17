@@ -1,8 +1,9 @@
 #!/bin/sh
 
 # Unpack frameworks
+FRAMEWORK_NAME="SquareReaderSDK"
 MAIN_FRAMEWORKS_DIR="$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH"
-NESTED_FRAMEWORKS_DIR="$MAIN_FRAMEWORKS_DIR/SquareReaderSDK.framework/Frameworks"
+NESTED_FRAMEWORKS_DIR="$MAIN_FRAMEWORKS_DIR/$FRAMEWORK_NAME.framework/Frameworks"
 
 # Don't choke if projects or targets have spaces in the name
 OLDIFS=$IFS
@@ -22,7 +23,7 @@ IFS=$OLDIFS
 # Remove unused architectures if archiving
 if [ "$ACTION" = "install" ]; then
 	FRAMEWORKS_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}/Frameworks"
-	READER_SDK_FRAMEWORKS=("CorePaymentCard.framework" "SquareCore.framework" "SquareReader.framework" "SquareReaderSDK.framework")
+	READER_SDK_FRAMEWORKS=("CorePaymentCard.framework" "SquareCore.framework" "SquareReader.framework" "$FRAMEWORK_NAME.framework")
 
 	for FRAMEWORK in "${READER_SDK_FRAMEWORKS[@]}"; do
 		FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORKS_PATH/$FRAMEWORK/Info.plist" CFBundleExecutable)

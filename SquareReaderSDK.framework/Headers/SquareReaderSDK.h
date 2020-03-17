@@ -18,6 +18,7 @@
 #import <SquareReaderSDK/SQRDReaderSettingsController.h>
 #import <SquareReaderSDK/SQRDStoreCustomerCardController.h>
 #import <SquareReaderSDK/SQRDCard.h>
+#import <SquareReaderSDK/SQRDCardReceiptDetails.h>
 #import <SquareReaderSDK/SQRDCheckoutController.h>
 #import <SquareReaderSDK/SQRDCurrencyCode.h>
 #import <SquareReaderSDK/SQRDErrorConstants.h>

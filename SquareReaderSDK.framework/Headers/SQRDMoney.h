@@ -63,7 +63,7 @@
  :nodoc:
  Returns an integer that can be used as a table address in a hash table structure.
  */
-@property (readonly) NSUInteger hash;
+@property (nonatomic, readonly) NSUInteger hash;
 
 /**
  :nodoc:

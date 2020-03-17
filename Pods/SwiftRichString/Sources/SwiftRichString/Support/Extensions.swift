@@ -35,6 +35,20 @@ import AppKit
 import UIKit
 #endif
 
+extension String {
+    
+    private static let escapeAmpRegExp = try! NSRegularExpression(pattern: "&(?!(#[0-9]{2,4}|[A-z]{2,6});)", options: NSRegularExpression.Options(rawValue: 0))
+
+    public func escapeWithUnicodeEntities() -> String {
+        let range = NSRange(location: 0, length: self.count)
+        return String.escapeAmpRegExp.stringByReplacingMatches(in: self,
+                                                               options: NSRegularExpression.MatchingOptions(rawValue: 0),
+                                                               range: range,
+                                                               withTemplate: "&amp;")
+    }
+    
+}
+
 extension NSNumber {
 	
 	internal static func from(float: Float?) -> NSNumber? {
@@ -57,3 +71,76 @@ extension NSNumber {
 	}
 	
 }
+
+extension NSAttributedString {
+    
+    @nonobjc func mutableStringCopy() -> NSMutableAttributedString {
+        guard let copy = mutableCopy() as? NSMutableAttributedString else {
+            fatalError("Failed to mutableCopy() \(self)")
+        }
+        return copy
+    }
+
+}
+
+public extension Array where Array.Element == StyleProtocol {
+    
+    /// Merge styles from array of `StyleProtocol` elements.
+    /// Merge is made in order where each n+1 elements may replace existing keys defined by n-1 elements.
+    ///
+    /// - Returns: merged style
+    func mergeStyle() -> Style {
+        var attributes: [NSAttributedString.Key:Any] = [:]
+        var textTransforms = [TextTransform]()
+        self.forEach {
+            attributes.merge($0.attributes, uniquingKeysWith: {
+                (_, new) in
+                return new
+            })
+            textTransforms.append(contentsOf: $0.textTransforms ?? [])
+        }
+        return Style(dictionary: attributes, textTransforms: (textTransforms.isEmpty ? nil : textTransforms))
+    }
+    
+}
+
+extension CGRect {
+    
+    init?(string: String?) {
+        guard let string = string else {
+            return nil
+        }
+        
+        let components: [CGFloat] = string.components(separatedBy: ",").compactMap {
+            guard let value = Float($0) else { return nil }
+            return CGFloat(value)
+        }
+        
+        guard components.count == 4 else {
+            return nil
+        }
+        
+        self =  CGRect(x: components[0],
+                      y: components[1],
+                      width: components[2],
+                      height: components[3])
+    }
+    
+}
+
+#if os(OSX)
+
+public extension NSImage {
+    
+    /// PNG data of the image.
+    func pngData() -> Data? {
+        self.lockFocus()
+        let bitmap = NSBitmapImageRep(focusedViewRect: NSRect(x: 0, y: 0, width: size.width, height: size.height))
+        let pngData = bitmap!.representation(using: .png, properties: [:])
+        self.unlockFocus()
+        return pngData
+    }
+    
+}
+
+#endif

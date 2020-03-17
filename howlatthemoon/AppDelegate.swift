@@ -68,7 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: request) { (data, response, error) in
-            guard let unwrappedData = data else { print("Error unwrapping data"); return }
+            guard let unwrappedData = data else {
+                print("Error unwrapping data"); return
+            }
             
             do {
                 let responseJSON = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as! CategoryJSON
